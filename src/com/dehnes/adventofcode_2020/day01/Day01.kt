@@ -10,14 +10,14 @@ data class DoneResult(
 
 object NoResult : Result()
 
-fun findTargetRecursive(target: Int, degreeRemaining: Int, inputDescensingOrder: List<Int>, candidates: List<Int>): Result {
+fun findTargetRecursive(target: Int, degreeRemaining: Int, inputDescendingOrder: List<Int>, candidates: List<Int>): Result {
 
-    for (candidate in inputDescensingOrder) {
+    for (candidate in inputDescendingOrder) {
         if (degreeRemaining > 0) {
             val result = findTargetRecursive(
                 target,
                 degreeRemaining - 1,
-                inputDescensingOrder,
+                inputDescendingOrder,
                 candidates + candidate
             )
             if (result is DoneResult) {
