@@ -5,31 +5,32 @@ import java.nio.charset.Charset
 
 sealed class Result
 data class DoneResult(
-    val result: List<Int>
+        val result: List<Int>
 ) : Result()
 
 object NoResult : Result()
 
 fun findTargetRecursive(target: Int, degreeRemaining: Int, inputDescendingOrder: List<Int>, candidates: List<Int>): Result {
-
-    for (candidate in inputDescendingOrder) {
+    inputDescendingOrder.forEach { candidate ->
         if (degreeRemaining > 0) {
-            val result = findTargetRecursive(
-                target,
-                degreeRemaining - 1,
-                inputDescendingOrder,
-                candidates + candidate
-            )
-            if (result is DoneResult) {
-                return result
-            } // continue
+            findTargetRecursive(
+                    target,
+                    degreeRemaining - 1,
+                    inputDescendingOrder,
+                    candidates + candidate
+            ).also { result ->
+                if (result is DoneResult) {
+                    return result
+                }
+            }
         } else {
-            val sum = (candidates).sum()
-            if (sum == target) {
-                return DoneResult(candidates)
-            } else if (sum > target) {
-                return NoResult
-            } // else continue
+            candidates.sum().also { sum ->
+                if (sum == target) {
+                    return DoneResult(candidates)
+                } else if (sum > target) {
+                    return NoResult
+                }
+            }
         }
     }
 
@@ -37,18 +38,16 @@ fun findTargetRecursive(target: Int, degreeRemaining: Int, inputDescendingOrder:
 }
 
 fun main() {
-    val result = findTargetRecursive(
-        2020,
-        3,
-        File("resources/day01.txt").readLines(Charset.defaultCharset())
-            .map { it.toInt() }
-            .sorted()
-            .reversed(),
-        emptyList()
-    )
-
-    println(result)
-    if (result is DoneResult) {
-        println("Product: " + result.result.reduce { acc, i -> acc * i })
+    for (degree in 2..3) {
+        val result = findTargetRecursive(
+                2020,
+                degree,
+                File("resources/day01.txt").readLines(Charset.defaultCharset())
+                        .map { it.toInt() }
+                        .sorted()
+                        .reversed(),
+                emptyList()
+        )
+        println("Done: degree=$degree, result=$result, product=" + (result as DoneResult).result.reduce { acc, i -> acc * i })
     }
 }
