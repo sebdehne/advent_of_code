@@ -38,16 +38,24 @@ fun findTargetRecursive(target: Int, degreeRemaining: Int, inputDescendingOrder:
 }
 
 fun main() {
-    for (degree in 2..3) {
-        val result = findTargetRecursive(
-                2020,
-                degree,
-                File("resources/day01.txt").readLines(Charset.defaultCharset())
-                        .map { it.toInt() }
-                        .sorted()
-                        .reversed(),
-                emptyList()
-        )
-        println("Done: degree=$degree, result=$result, product=" + (result as DoneResult).result.reduce { acc, i -> acc * i })
-    }
+    File("resources/day01.txt")
+            .readLines(Charset.defaultCharset())
+            .map { it.toInt() }
+            .sorted()
+            .reversed()
+            .also { inputDescendingOrder ->
+                for (degree in 2..3) {
+                    val result = findTargetRecursive(
+                            2020,
+                            degree,
+                            inputDescendingOrder,
+                            emptyList()
+                    )
+                    println("Done: " +
+                            "degree=$degree, " +
+                            "result=$result, " +
+                            "product=" + (result as DoneResult).result.reduce { acc, i -> acc * i }
+                    )
+                }
+            }
 }
