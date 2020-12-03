@@ -7,25 +7,7 @@ data class PasswordPolicy(
         val start: Int,
         val end: Int,
         val char: Char
-) {
-    companion object {
-        fun create(policyString: String): PasswordPolicy {
-            val parts = policyString.split(" ").map(String::trim)
-            val range = parts[0]
-            val character = parts[1][0]
-
-            val rangeParts = range.split("-").map(String::trim)
-            val start = rangeParts[0].toInt()
-            val end = rangeParts[1].toInt()
-
-            return PasswordPolicy(
-                    start,
-                    end,
-                    character
-            )
-        }
-    }
-}
+)
 
 fun String.isValidPasswordPart1(policy: PasswordPolicy) = IntRange(policy.start, policy.end).contains(this
         .filter { it == policy.char }
@@ -39,11 +21,20 @@ fun String.isValidPasswordPart2(policy: PasswordPolicy): Boolean {
 }
 
 fun main() {
+    val pattern = "(\\d+)-(\\d+)\\s+(\\S):\\s+(\\S+)".toRegex()
     val passwords = File("resources/day02.txt")
             .readLines(Charset.defaultCharset())
             .map { line ->
-                val map = line.split(":").map(String::trim)
-                PasswordPolicy.create(map[0]) to map[1]
+                pattern.findAll(line)
+                        .toList()
+                        .flatMap { matchResult -> matchResult.groupValues }
+                        .let { parts ->
+                            PasswordPolicy(
+                                    parts[1].toInt(),
+                                    parts[2].toInt(),
+                                    parts[3][0]
+                            ) to parts[4]
+                        }
             }
 
     val part1 = passwords
@@ -53,7 +44,6 @@ fun main() {
 
     val part2 = passwords
             .filter { it.second.isValidPasswordPart2(it.first) }
-            .onEach { println(it) }
             .count()
     println("Result part2: $part2")
 }
