@@ -8,36 +8,19 @@ data class Point(
         val offset: Int
 )
 
-data class Map(
-        val lineLength: Int,
-        val mapData: List<String>
-) {
-    companion object {
-        fun create(lines: List<String>) = Map(
-                lines.first().length.also { length ->
-                    check(lines.all { it.length == length })
-                },
-                lines
-        )
-    }
+fun List<String>.isTree(pos: Point) = this[pos.line][pos.offset] == '#'
 
-    fun isTree(pos: Point) = mapData[pos.line][pos.offset] == '#'
-
-    fun moveTo(current: Point, lineDelta: Int, offsetDelta: Int) = (current.line + lineDelta).let { newLineOffset ->
-        if (newLineOffset < 0 || newLineOffset >= mapData.size) {
-            null
-        } else {
-            Point(newLineOffset, (current.offset + offsetDelta) % lineLength)
-        }
+fun List<String>.moveTo(current: Point, lineDelta: Int, offsetDelta: Int) = (current.line + lineDelta).let { newLineOffset ->
+    if (newLineOffset < 0 || newLineOffset >= this.size) {
+        null
+    } else {
+        Point(newLineOffset, (current.offset + offsetDelta) % this[newLineOffset].length)
     }
 }
 
-
 fun main() {
-    val map = Map.create(
-            File("resources/day03.txt")
-                    .readLines(Charset.defaultCharset())
-    )
+    val map = File("resources/day03.txt")
+            .readLines(Charset.defaultCharset())
 
     val resultPart1 = testSlope(map, 1, 3)
     println("Result part1: $resultPart1")
@@ -55,7 +38,7 @@ fun main() {
     println("Result part2: $resultPart2")
 }
 
-private fun testSlope(map: Map, lineDelta: Int, offsetDelta: Int): Long {
+private fun testSlope(map: List<String>, lineDelta: Int, offsetDelta: Int): Long {
     var pos = Point(0, 0)
     var treeCount = 0L
     while (true) {
