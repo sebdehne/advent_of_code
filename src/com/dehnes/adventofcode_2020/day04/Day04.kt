@@ -49,14 +49,10 @@ fun main() {
 
     val countValidPassports = { validationRules: Map<String, (value: String?) -> Boolean> ->
         passports.count { p ->
-            val allFieldsAreValid = p.keys.all { f -> f in validationRules }
-            val invalidFields = validationRules
-                    .filter { validationRule ->
-                        val value = p[validationRule.key]
-                        !validationRule.value.invoke(value)
-                    }
-
-            allFieldsAreValid && invalidFields.isEmpty()
+            validationRules.filter { validationRule ->
+                val value = p[validationRule.key]
+                !validationRule.value.invoke(value)
+            }.isEmpty()
         }
     }
 
@@ -66,26 +62,9 @@ fun main() {
     println("Done: part1=$countPart1, part2=$countPart2, totalPassports=${passports.size}") // 230, 156, 255
 }
 
-private fun readAllPassports(): List<Map<String, String>> {
-    val currentPassport = mutableMapOf<String, String>()
-    val passports = mutableListOf<Map<String, String>>()
-    File("resources/day04.txt")
-            .readLines(Charset.defaultCharset())
-            .forEach { line ->
-                if (line.isBlank()) {
-                    if (currentPassport.isNotEmpty()) {
-                        passports.add(currentPassport.toMap())
-                        currentPassport.clear()
-                    }
-                } else {
-                    line.split(" ").forEach { keyValue ->
-                        val split = keyValue.split(":")
-                        currentPassport[split[0]] = split[1]
-                    }
-                }
-            }
-    if (currentPassport.isNotEmpty()) {
-        passports.add(currentPassport.toMap())
+private fun readAllPassports() = File("resources/day04.txt").readText(Charset.defaultCharset()).split("\n\n").map {
+    it.replace("\n", " ").split(" ").associate {
+        val (left, right) = it.split(":")
+        left to right
     }
-    return passports
 }
