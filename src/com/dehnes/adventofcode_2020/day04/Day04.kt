@@ -49,7 +49,7 @@ fun main() {
 
     val countValidPassports = { validationRules: Map<String, (value: String?) -> Boolean> ->
         passports.count { p ->
-            val allFieldsAreValid = p.keys.all { f -> f in validationRulesPart2 }
+            val allFieldsAreValid = p.keys.all { f -> f in validationRules }
             val invalidFields = validationRules
                     .filter { validationRule ->
                         val value = p[validationRule.key]
