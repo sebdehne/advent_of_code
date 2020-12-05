@@ -17,9 +17,11 @@ data class Seat(
     }
 
     fun seatId() = row * 8 + column
+    operator fun plus(addToId: Int) = Seat(row + ((column + addToId) / 8), (column + addToId) % 8)
 }
 
 fun main() {
+
     val seats = File("resources/day05.txt")
             .readLines(Charset.defaultCharset())
             .map(Seat::decode)
@@ -27,15 +29,10 @@ fun main() {
 
     println("Part1: highest seat ID: ${seats.maxByOrNull { it.seatId() }?.seatId()}")
 
-    val rowWithMissingSeat = seats
-            .groupBy { it.row }
-            .filterNot { it.key == seats.first().row || it.key == seats.last().row }
-            .filter { e -> e.value.size < 8 }
-            .entries.first()
-    val missingSeat = Seat(
-            rowWithMissingSeat.key,
-            (0..7).filterNot { it in rowWithMissingSeat.value.map { it.column } }.single())
+    val mySeat = seats.filterIndexed { index, seat ->
+        index < seats.size - 2 && seat + 1 != seats[index + 1]
+    }.single() + 1
 
-    println("Part2: My seat is: $missingSeat - ID: ${missingSeat.seatId()}")
+    println("Part2: my seat=$mySeat - ID: ${mySeat.seatId()}")
 
 }
