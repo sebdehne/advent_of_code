@@ -1,7 +1,13 @@
 package com.dehnes.adventofcode_2020.day04
 
 import java.io.File
-import java.nio.charset.Charset
+
+val passports = File("resources/day04.txt").readText().split("\n\n").map {
+    it.replace("\n", " ").split(" ").associate {
+        val (left, right) = it.split(":")
+        left to right
+    }
+}
 
 val validationRulesPart1 = mapOf(
         "byr" to { value: String? -> value != null },
@@ -11,7 +17,7 @@ val validationRulesPart1 = mapOf(
         "hcl" to { value: String? -> value != null },
         "ecl" to { value: String? -> value != null },
         "pid" to { value: String? -> value != null },
-        "cid" to { value: String? -> true }
+        "cid" to { true }
 )
 
 val validationRulesPart2 = mapOf(
@@ -40,31 +46,14 @@ val validationRulesPart2 = mapOf(
         "hcl" to { value: String? -> value?.matches("#[0-9a-f]{6}".toRegex()) == true },
         "ecl" to { value: String? -> value in listOf("amb", "blu", "brn", "gry", "grn", "hzl", "oth") },
         "pid" to { value: String? -> value?.matches("[0-9]{9}".toRegex()) == true },
-        "cid" to { value: String? -> true }
+        "cid" to { true }
 )
 
-fun main() {
-
-    val passports = readAllPassports()
-
-    val countValidPassports = { validationRules: Map<String, (value: String?) -> Boolean> ->
-        passports.count { p ->
-            validationRules.filter { validationRule ->
-                val value = p[validationRule.key]
-                !validationRule.value.invoke(value)
-            }.isEmpty()
-        }
-    }
-
-    val countPart1 = countValidPassports(validationRulesPart1)
-    val countPart2 = countValidPassports(validationRulesPart2)
-
-    println("Done: part1=$countPart1, part2=$countPart2, totalPassports=${passports.size}") // 230, 156, 255
+fun countValidPassports(rules: Map<String, (value: String?) -> Boolean>) = passports.count { p ->
+    rules.filterNot { e -> e.value.invoke(p[e.key]) }.isEmpty()
 }
 
-private fun readAllPassports() = File("resources/day04.txt").readText(Charset.defaultCharset()).split("\n\n").map {
-    it.replace("\n", " ").split(" ").associate {
-        val (left, right) = it.split(":")
-        left to right
-    }
+fun main() {
+    println("Part1: ${countValidPassports(validationRulesPart1)}") // 230
+    println("Part2: ${countValidPassports(validationRulesPart2)}") // 156
 }
