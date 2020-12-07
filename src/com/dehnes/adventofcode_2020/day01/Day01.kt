@@ -1,61 +1,33 @@
 package com.dehnes.adventofcode_2020.day01
 
 import java.io.File
-import java.nio.charset.Charset
 
-sealed class Result
-data class DoneResult(
-        val result: List<Int>
-) : Result()
+val inputDescendingOrder = File("resources/day01.txt").readLines().map(String::toInt).sorted().reversed()
 
-object NoResult : Result()
-
-fun findTargetRecursive(target: Int, degreeRemaining: Int, inputDescendingOrder: List<Int>, candidates: List<Int>): Result {
-    inputDescendingOrder.forEach { candidate ->
+fun findTargetRecursive(target: Int, degreeRemaining: Int, candidates: List<Int>): List<Int>? {
+    for (candidate in inputDescendingOrder) {
         if (degreeRemaining > 0) {
-            findTargetRecursive(
-                    target,
-                    degreeRemaining - 1,
-                    inputDescendingOrder,
-                    candidates + candidate
-            ).also { result ->
-                if (result is DoneResult) {
+            findTargetRecursive(target, degreeRemaining - 1, candidates + candidate).also { result ->
+                if (result != null) {
                     return result
                 }
             }
         } else {
             candidates.sum().also { sum ->
                 if (sum == target) {
-                    return DoneResult(candidates)
+                    return candidates
                 } else if (sum > target) {
-                    return NoResult
+                    return null
                 }
             }
         }
     }
-
-    return NoResult
+    return null
 }
 
+fun List<Int>.product() = this.reduce { acc, i -> acc * i }
+
 fun main() {
-    File("resources/day01.txt")
-            .readLines(Charset.defaultCharset())
-            .map { it.toInt() }
-            .sorted()
-            .reversed()
-            .also { inputDescendingOrder ->
-                for (degree in 2..3) {
-                    val result = findTargetRecursive(
-                            2020,
-                            degree,
-                            inputDescendingOrder,
-                            emptyList()
-                    )
-                    println("Done: " +
-                            "degree=$degree, " +
-                            "result=$result, " +
-                            "product=" + (result as DoneResult).result.reduce { acc, i -> acc * i }
-                    )
-                }
-            }
+    println("Part1: ${findTargetRecursive(2020, 2, emptyList())!!.product()}")
+    println("Part1: ${findTargetRecursive(2020, 3, emptyList())!!.product()}")
 }
