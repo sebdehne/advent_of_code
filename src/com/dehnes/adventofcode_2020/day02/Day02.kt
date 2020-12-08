@@ -10,15 +10,13 @@ fun isValidPasswordPart1(passwordToPolicy: Pair<String, Pair<IntRange, Char>>) =
 fun isValidPasswordPart2(passwordToPolicy: Pair<String, Pair<IntRange, Char>>): Boolean {
     val isFirst = passwordToPolicy.first.getOrNull(passwordToPolicy.second.first.first - 1) == passwordToPolicy.second.second
     val isSecond = passwordToPolicy.first.getOrNull(passwordToPolicy.second.first.last - 1) == passwordToPolicy.second.second
-    return (isFirst && !isSecond) || (!isFirst && isSecond)
+    return isFirst.xor(isSecond)
 }
 
 val pattern = "(\\d+)-(\\d+)\\s+(\\S):\\s+(\\S+)".toRegex()
 val passwords = File("resources/day02.txt").readLines().map {
-    pattern.findAll(it).toList().flatMap { matchResult -> matchResult.groupValues }
-            .let { parts ->
-                parts[4] to (parts[1].toInt()..parts[2].toInt() to parts[3][0])
-            }
+    val (start, end, c, password) = pattern.find(it)!!.destructured
+    password to (start.toInt()..end.toInt() to c[0])
 }
 
 fun main() {
