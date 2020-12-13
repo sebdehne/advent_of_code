@@ -7,7 +7,7 @@ class Day01 {
 
     val inputDescendingOrder = File("resources/day01.txt").readLines().map(String::toInt).sorted().reversed()
 
-    fun findTargetRecursive(target: Int, degreeRemaining: Int, candidates: List<Int>): List<Int>? {
+    fun findTargetRecursive(target: Int, degreeRemaining: Int, candidates: List<Int> = emptyList()): List<Int>? {
         for (candidate in inputDescendingOrder) {
             if (degreeRemaining > 0) {
                 findTargetRecursive(target, degreeRemaining - 1, candidates + candidate).also { result ->
@@ -32,8 +32,8 @@ class Day01 {
 
     @Test
     fun run() {
-        println("Part1: ${findTargetRecursive(2020, 2, emptyList())!!.product()}")
-        println("Part1: ${findTargetRecursive(2020, 3, emptyList())!!.product()}")
+        println("Part1: ${findTargetRecursive(2020, 2)!!.product()}")
+        println("Part1: ${findTargetRecursive(2020, 3)!!.product()}")
     }
 
 }

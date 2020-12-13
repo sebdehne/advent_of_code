@@ -5,9 +5,7 @@ import java.io.File
 
 class Day10 {
     val adapters = File("resources/day10.txt").readLines().map { it.toInt() }.sorted()
-    val jolts = adapters.let {
-        listOf(0) + it + (it.last() + 3)
-    }
+    val jolts = adapters.let { listOf(0) + it + (it.last() + 3) }
 
     @Test
     fun run() {
@@ -15,7 +13,6 @@ class Day10 {
             val (a, b) = it
             (b - a) to b
         }.groupingBy { it.first }.eachCount()
-
         println("Part1: " + deltas[1]!! * deltas[3]!!) // 2263
 
         var count = 0
@@ -33,7 +30,6 @@ class Day10 {
             }
             count++
         }
-
         println("Part2: $product") // 396857386627072
     }
 

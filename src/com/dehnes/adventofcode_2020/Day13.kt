@@ -13,13 +13,16 @@ class Day13 {
         val (buss, timeToWait) = input.filter { it != -1L }.map { b -> b to b - (timestamp % b) }.minByOrNull { it.second }!!
         println("Part1: ${buss * timeToWait}") // 4207
 
-        val alignAt = input.mapIndexed { index, s -> s to index.toLong() }.filter { it.first >= 0 }.fold(1L to 0L) { acc, b ->
-            lcd(acc.first, b.first) to alignAt(acc.second, acc.first, b.first, b.second)
-        }.second
+        val alignAt = input
+                .mapIndexed { i, s -> s to i.toLong() }
+                .filter { it.first >= 0 }
+                .fold(1L to 0L) { (combinedId, alignsAt), (id, delay) ->
+                    lcd(combinedId, id) to alignsAt(alignsAt, combinedId, id, delay)
+                }.second
         println("Part2: $alignAt") // 725850285300475
     }
 
-    fun alignAt(initOffset: Long, n1: Long, n2: Long, n2Delta: Long): Long = generateSequence(0) { it + 1 }
+    fun alignsAt(initOffset: Long, n1: Long, n2: Long, n2Delta: Long): Long = generateSequence(0) { it + 1 }
             .map { it * n1 + initOffset }
             .first { (it + n2Delta) % n2 == 0L }
 
