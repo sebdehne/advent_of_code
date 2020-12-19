@@ -39,6 +39,6 @@ class Day16 {
 
         println("Part2: $part2") // 2564529489989
     }
-}
 
-fun Pair<String, Pair<IntRange, IntRange>>.fits(i: Int) = i in this.second.first || i in this.second.second
+    fun Pair<String, Pair<IntRange, IntRange>>.fits(i: Int) = i in this.second.first || i in this.second.second
+}
