@@ -4,33 +4,25 @@ import org.junit.jupiter.api.Test
 
 class Day23 {
 
+    val list = "614752839".toList().map { it.toString().toInt() }
+
     @Test
-    fun part1Array() {
-        val input = "389125467"
-        val list = input.toList().map { it.toString().toInt() }
-        val result = play(list, 10, 8)
+    fun part1() {
+        val result = play(list, 100, 8)
         println(result.joinToString("")) // 89372645
     }
 
     @Test
-    fun part2Array() {
-        val input = "614752839"
-        val list = input.toList().map { it.toString().toInt() }
-
-        val max = list.maxOrNull()!!
+    fun part2() {
         val updatedInput = list.toMutableList()
-        for (n in (max + 1)..1_000_000) {
-            updatedInput.add(n)
-        }
+        updatedInput += (list.size + 1)..1_000_000
         val (first, two) = play(updatedInput, 10_000_000, 2)
 
-        println(first.toLong() * two.toLong())
+        println(first.toLong() * two.toLong()) // 21273394210
     }
 
 
     private fun play(input: List<Int>, moves: Int, resultLength: Int): List<Int> {
-        val max = input.maxOrNull()!!
-
         val cupToNextNeighbor = IntArray(input.size + 1)
         input.windowed(2) { (a, b) ->
             cupToNextNeighbor[a] = b
@@ -48,7 +40,7 @@ class Day23 {
             var dstValue = current - 1
             while (true) {
                 if (dstValue == 0) {
-                    dstValue = max
+                    dstValue = input.size
                 } else if (dstValue == pickedUp[0] || dstValue == pickedUp[1] || dstValue == pickedUp[2]) {
                     dstValue--
                 } else {
