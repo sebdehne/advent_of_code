@@ -50,9 +50,7 @@ class Day22 {
                 val one = p1[0]
                 val two = p2[0]
 
-                val oneRemainig = p1.size - 1
-                val twoRemainig = p2.size - 1
-                if (recursive && one <= oneRemainig && two <= twoRemainig) {
+                if (recursive && one <= p1.size - 1 && two <= p2.size - 1) {
                     play(p1.slice(1..one), p2.slice(1..two), recursive).first.isNotEmpty()
                 } else {
                     one > two
