@@ -1,11 +1,11 @@
-package com.dehnes.adventofcode_2020
+package com.dehnes.adventofcode.v2020
 
 import org.junit.jupiter.api.Test
 import java.io.File
 
 class Day01 {
 
-    val inputDescendingOrder = File("resources/day01.txt").readLines().map(String::toInt).sorted().reversed()
+    val inputDescendingOrder = File("resources/2020/day01.txt").readLines().map(String::toInt).sorted().reversed()
 
     fun findTargetRecursive(target: Int, degreeRemaining: Int, candidates: List<Int> = emptyList()): List<Int>? {
         for (candidate in inputDescendingOrder) {

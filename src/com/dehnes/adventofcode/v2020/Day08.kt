@@ -1,10 +1,10 @@
-package com.dehnes.adventofcode_2020
+package com.dehnes.adventofcode.v2020
 
 import org.junit.jupiter.api.Test
 import java.io.File
 
 class Day08 {
-    val code = File("resources/day08.txt").readLines().map { line ->
+    val code = File("resources/2020/day08.txt").readLines().map { line ->
         val (op, arg) = line.split(" ")
         op to arg.toInt()
     }

@@ -1,11 +1,11 @@
-package com.dehnes.adventofcode_2020
+package com.dehnes.adventofcode.v2020
 
 import org.junit.jupiter.api.Test
 import java.io.File
 
 class Day21 {
 
-    val foods = File("resources/day21.txt").readLines().map { line ->
+    val foods = File("resources/2020/day21.txt").readLines().map { line ->
         val (ingredientsStr, allergensStr) = line.split(" (contains ", ")")
         ingredientsStr.split(" ") to allergensStr.split(", ")
     }

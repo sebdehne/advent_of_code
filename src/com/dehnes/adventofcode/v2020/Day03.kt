@@ -1,10 +1,10 @@
-package com.dehnes.adventofcode_2020
+package com.dehnes.adventofcode.v2020
 
 import org.junit.jupiter.api.Test
 import java.io.File
 
 class Day03 {
-    val map = File("resources/day03.txt").readLines()
+    val map = File("resources/2020/day03.txt").readLines()
 
     fun calcTreesForSlope(slope: Pair<Int, Int>): Long {
         var pos = 0 to 0

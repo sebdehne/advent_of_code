@@ -1,11 +1,11 @@
-package com.dehnes.adventofcode_2020
+package com.dehnes.adventofcode.v2020
 
 import org.junit.jupiter.api.Test
 import java.io.File
 
 class Day17 {
 
-    val initial2 = File("resources/day17.txt").readLines()
+    val initial2 = File("resources/2020/day17.txt").readLines()
             .map { it.toList().map { it == '#' } }
 
     @Test

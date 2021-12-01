@@ -1,10 +1,10 @@
-package com.dehnes.adventofcode_2020
+package com.dehnes.adventofcode.v2020
 
 import org.junit.jupiter.api.Test
 import java.io.File
 
 class Day05 {
-    val seats = File("resources/day05.txt").readLines()
+    val seats = File("resources/2020/day05.txt").readLines()
             .map { Integer.parseInt(it.replace("[FL]".toRegex(), "0").replace("[RB]".toRegex(), "1"), 2) }
             .sorted()
 

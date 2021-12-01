@@ -1,10 +1,10 @@
-package com.dehnes.adventofcode_2020
+package com.dehnes.adventofcode.v2020
 
 import org.junit.jupiter.api.Test
 import java.io.File
 
 class Day04 {
-    val passports = File("resources/day04.txt").readText().split("\n\n").map {
+    val passports = File("resources/2020/day04.txt").readText().split("\n\n").map {
         it.replace("\n", " ").split(" ").associate {
             val (left, right) = it.split(":")
             left to right

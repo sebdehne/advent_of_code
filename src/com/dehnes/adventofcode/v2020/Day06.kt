@@ -1,11 +1,11 @@
-package com.dehnes.adventofcode_2020
+package com.dehnes.adventofcode.v2020
 
 import org.junit.jupiter.api.Test
 import java.io.File
 
 class Day06 {
 
-    val groups = File("resources/day06.txt").readText().split("\n\n")
+    val groups = File("resources/2020/day06.txt").readText().split("\n\n")
 
     @Test
     fun run() {

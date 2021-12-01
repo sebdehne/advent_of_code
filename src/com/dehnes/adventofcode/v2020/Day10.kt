@@ -1,10 +1,10 @@
-package com.dehnes.adventofcode_2020
+package com.dehnes.adventofcode.v2020
 
 import org.junit.jupiter.api.Test
 import java.io.File
 
 class Day10 {
-    val adapters = File("resources/day10.txt").readLines().map { it.toInt() }.sorted()
+    val adapters = File("resources/2020/day10.txt").readLines().map { it.toInt() }.sorted()
     val jolts = adapters.let { listOf(0) + it + (it.last() + 3) }
 
     @Test

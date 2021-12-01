@@ -1,4 +1,4 @@
-package com.dehnes.adventofcode_2020
+package com.dehnes.adventofcode.v2020
 
 import org.junit.jupiter.api.Test
 import java.io.File
@@ -9,7 +9,7 @@ class Day22 {
     val player2: List<Int>
 
     init {
-        val (p1, p2) = File("resources/day22.txt").readText().split("\n\n").map { str ->
+        val (p1, p2) = File("resources/2020/day22.txt").readText().split("\n\n").map { str ->
             val lines = str.split("\n")
             lines.slice(1 until lines.size).map { it.toInt() }
         }

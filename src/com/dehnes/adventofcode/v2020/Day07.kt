@@ -1,10 +1,10 @@
-package com.dehnes.adventofcode_2020
+package com.dehnes.adventofcode.v2020
 
 import org.junit.jupiter.api.Test
 import java.io.File
 
 class Day07 {
-    val bagRules = File("resources/day07.txt").readLines().map { ruleStr ->
+    val bagRules = File("resources/2020/day07.txt").readLines().map { ruleStr ->
         ruleStr.split(" ", ",", ".").filter(String::isNotBlank).let { split ->
             "${split[0]} ${split[1]}" to (4 until split.size step 4).map {
                 split[it].replace("no", "0").toInt() to "${split[it + 1]} ${split[it + 2]}"

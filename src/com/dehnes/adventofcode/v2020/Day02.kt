@@ -1,4 +1,4 @@
-package com.dehnes.adventofcode_2020
+package com.dehnes.adventofcode.v2020
 
 import org.junit.jupiter.api.Test
 import java.io.File
@@ -16,7 +16,7 @@ class Day02 {
     }
 
     val pattern = "(\\d+)-(\\d+)\\s+(\\S):\\s+(\\S+)".toRegex()
-    val passwords = File("resources/day02.txt").readLines().map {
+    val passwords = File("resources/2020/day02.txt").readLines().map {
         val (start, end, c, password) = pattern.find(it)!!.destructured
         password to (start.toInt()..end.toInt() to c[0])
     }

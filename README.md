@@ -1,3 +1,3 @@
-# Advent Of Code 2020
+# Advent Of Code solutions
 
-My attempt to solve [Advent Of Code 2020](https://adventofcode.com/)
+My attempt to solve [Advent Of Code](https://adventofcode.com/)

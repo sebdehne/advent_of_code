@@ -1,10 +1,10 @@
-package com.dehnes.adventofcode_2020
+package com.dehnes.adventofcode.v2020
 
 import org.junit.jupiter.api.Test
 import java.io.File
 
 class Day11 {
-    val originalMap = File("resources/day11.txt").readLines().map { it.toList() }
+    val originalMap = File("resources/2020/day11.txt").readLines().map { it.toList() }
     val length = originalMap.first().size
 
     fun Pair<Int, Int>.next() = this.first + (this.second + 1) / length to (this.second + 1) % length

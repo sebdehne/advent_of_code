@@ -1,4 +1,4 @@
-package com.dehnes.adventofcode_2020
+package com.dehnes.adventofcode.v2020
 
 import org.junit.jupiter.api.Test
 import java.io.File
@@ -18,7 +18,7 @@ class Day20 {
 
     init {
         val tmpImages = mutableListOf<Image>()
-        File("resources/day20.txt").readText().split("\n\n").forEach { imgStr ->
+        File("resources/2020/day20.txt").readText().split("\n\n").forEach { imgStr ->
             val lines = imgStr.split("\n")
             val id = lines[0].substring(5, 9).toLong()
             val img = lines.slice(1 until lines.size).map { imgLine -> imgLine.toCharArray() }.toTypedArray()

@@ -1,11 +1,11 @@
-package com.dehnes.adventofcode_2020
+package com.dehnes.adventofcode.v2020
 
 import org.junit.jupiter.api.Test
 import java.io.File
 import kotlin.math.absoluteValue
 
 class Day12 {
-    val instructions = File("resources/day12.txt").readLines().map { dirAndLength ->
+    val instructions = File("resources/2020/day12.txt").readLines().map { dirAndLength ->
         dirAndLength[0] to dirAndLength.substring(1).toInt()
     }
 

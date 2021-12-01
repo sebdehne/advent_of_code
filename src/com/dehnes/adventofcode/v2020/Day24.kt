@@ -1,4 +1,4 @@
-package com.dehnes.adventofcode_2020
+package com.dehnes.adventofcode.v2020
 
 import org.junit.jupiter.api.Test
 import java.io.File
@@ -6,7 +6,7 @@ import java.io.File
 class Day24 {
 
     val alleSteps = listOf("ne", "nw", "w", "sw", "se", "e")
-    val space = File("resources/day24.txt").readLines().map { line ->
+    val space = File("resources/2020/day24.txt").readLines().map { line ->
         line.toList().fold(emptyList()) { acc: List<String>, c ->
             val lastOrNull = acc.lastOrNull()
             if (lastOrNull == "s" || lastOrNull == "n") {

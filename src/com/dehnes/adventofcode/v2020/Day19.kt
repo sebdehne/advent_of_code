@@ -1,4 +1,4 @@
-package com.dehnes.adventofcode_2020
+package com.dehnes.adventofcode.v2020
 
 import org.junit.jupiter.api.Test
 import java.io.File
@@ -10,7 +10,7 @@ class Day19 {
     val messageList: List<String>
 
     init {
-        val (a, b) = File("resources/day19.txt").readText().split("\n\n")
+        val (a, b) = File("resources/2020/day19.txt").readText().split("\n\n")
         messages = b
         unresolvedRules = a.split("\n").map { rule ->
             val (id, rest) = rule.split(": ")

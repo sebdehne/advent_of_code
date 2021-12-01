@@ -1,11 +1,11 @@
-package com.dehnes.adventofcode_2020
+package com.dehnes.adventofcode.v2020
 
 import org.junit.jupiter.api.Test
 import java.io.File
 
 class Day09 {
 
-    val numbers = File("resources/day09.txt").readLines().map { it.toLong() }
+    val numbers = File("resources/2020/day09.txt").readLines().map { it.toLong() }
     val preamble = 25
 
     fun part1() = numbers.filterIndexed { i, l ->

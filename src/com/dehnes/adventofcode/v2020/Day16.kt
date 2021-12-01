@@ -1,4 +1,4 @@
-package com.dehnes.adventofcode_2020
+package com.dehnes.adventofcode.v2020
 
 import org.junit.jupiter.api.Test
 import java.io.File
@@ -7,7 +7,7 @@ class Day16 {
 
     @Test
     fun test() {
-        val (rangesStr, myTicketStr, otherTicketsStr) = File("resources/day16.txt").readText().split("your ticket:", "nearby tickets:")
+        val (rangesStr, myTicketStr, otherTicketsStr) = File("resources/2020/day16.txt").readText().split("your ticket:", "nearby tickets:")
         val validRanges = rangesStr.trim().split("\n").map { range ->
             val (name, r1From, r1To, r2From, r2To) = "([\\w\\s]+): (\\d+)-(\\d+) or (\\d+)-(\\d+)".toRegex().find(range)!!.destructured
             name to ((r1From.toInt()..r1To.toInt()) to (r2From.toInt()..r2To.toInt()))
