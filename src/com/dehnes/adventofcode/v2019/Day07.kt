@@ -41,6 +41,7 @@ class Day07 {
                     when (result) {
                         is Terminated -> done = true
                         is Output -> signal = result.value
+                        else -> error("")
                     }
                 }
             }
