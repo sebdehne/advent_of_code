@@ -1,18 +1,17 @@
 package com.dehnes.adventofcode.v2022
 
 import org.junit.jupiter.api.Test
-import java.io.File
+import strikt.api.expectThat
+import strikt.assertions.isEqualTo
 
 class Day01 {
-
-    val input = File("resources/2022/day01.txt").readLines()
 
     @Test
     fun run() {
         val calories = mutableListOf<Long>()
 
         var current = 0L
-        input.forEach { line ->
+        inputLines(1).forEach { line ->
             val cal = line.trim().ifBlank { null }?.toLong()
             if (cal == null) {
                 calories.add(current)
@@ -29,7 +28,10 @@ class Day01 {
             top[calories.indexOfFirst { it == max }] = max
         }
 
-        println("Part1: ${top.entries.first().value}")
-        println("Part2: ${top.values.sum()}")
+        // part - 1
+        expectThat(top.entries.first().value) isEqualTo 68923
+
+        // part - 2
+        expectThat(top.values.sum()) isEqualTo 200044
     }
 }
