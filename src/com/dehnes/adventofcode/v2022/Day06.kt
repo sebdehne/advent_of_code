@@ -9,19 +9,19 @@ class Day06 {
     @Test
     fun run() {
         val line = inputLines(6).first()
-        expectThat(findMarker2(line, 4)) isEqualTo 1816
-        expectThat(findMarker2(line, 14)) isEqualTo 2625
+        expectThat(firstDistinct(line, 4)) isEqualTo 1816
+        expectThat(firstDistinct(line, 14)) isEqualTo 2625
     }
 
-    private fun findMarker2(line: String, limit: Int): Int {
+    private fun firstDistinct(line: String, limit: Int): Int {
         var count = limit
-        var reslt = -1
+        var result = -1
         line.windowed(limit, 1) {
-            if (reslt == -1 && it.toList().distinct().size == limit) {
-                reslt = count
+            if (result == -1 && it.toList().distinct().size == limit) {
+                result = count
             }
             count++
         }
-        return reslt
+        return result
     }
 }
