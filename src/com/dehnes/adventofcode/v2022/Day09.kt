@@ -49,10 +49,11 @@ class Day09 {
     private fun Pair<Int, Int>.isInProximity(other: Pair<Int, Int>) =
         (this.first - other.first).absoluteValue in 0..1 && (this.second - other.second).absoluteValue in 0..1
 
-    private operator fun Pair<Int, Int>.plus(o: Pair<Int, Int>) = (this.first + o.first) to (this.second + o.second)
-    private operator fun Pair<Int, Int>.minus(o: Pair<Int, Int>) = (this.first - o.first) to (this.second - o.second)
     private fun Pair<Int, Int>.limit() = (if (this.first > 1) 1 else if (this.first < -1) -1 else this.first) to
             if (this.second > 1) 1 else if (this.second < -1) -1 else this.second
 
 }
+
+operator fun Pair<Int, Int>.plus(o: Pair<Int, Int>) = (this.first + o.first) to (this.second + o.second)
+operator fun Pair<Int, Int>.minus(o: Pair<Int, Int>) = (this.first - o.first) to (this.second - o.second)
 
