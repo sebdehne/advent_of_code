@@ -34,23 +34,15 @@ class Day12 {
 
         val allStartPositions = mutableListOf<Pair<Int, Int>>()
         grid.forEachIndexed { y, line ->
-            line.forEachIndexed { x, c ->
-                if (c == 0) {
+            line.forEachIndexed { x, height ->
+                if (height == 0) {
                     allStartPositions.add(y to x)
                 }
             }
         }
 
-        var shortesStart = Int.MAX_VALUE
-        allStartPositions.forEach { start ->
-            val candidate = grid.shortestTo(dst, start)
-            if (candidate < shortesStart) {
-                shortesStart = candidate
-            }
-        }
-
         expectThat(grid.shortestTo(dst, startPos)) isEqualTo 437
-        expectThat(shortesStart) isEqualTo 430
+        expectThat(allStartPositions.minOf { grid.shortestTo(dst, it) }) isEqualTo 430
     }
 
     fun Array<IntArray>.shortestTo(dst: Pair<Int, Int>, start: Pair<Int, Int>): Int {
@@ -64,15 +56,12 @@ class Day12 {
             val copy = paths.toList()
             paths.clear()
             copy.forEach { p ->
-                val pos = p.last()
-                val candidates = this.possibleSteps(pos).filterNot { it in visited }
+                val candidates = this.possibleSteps(p.last()).filterNot { it in visited }
                 if (candidates.any { it == dst }) {
                     return p.size
                 }
                 visited.addAll(candidates)
-                candidates.forEach { c ->
-                    paths.add((p + c).toMutableList())
-                }
+                candidates.forEach { c -> paths.add(p + c) }
             }
 
             if (paths.isEmpty()) {
