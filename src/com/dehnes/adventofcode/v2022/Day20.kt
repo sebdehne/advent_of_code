@@ -9,8 +9,8 @@ class Day20 {
 
     @Test
     fun run() {
-        expectThat(solve(10, 811589153)) isEqualTo 4789999181006
         expectThat(solve(1, 1)) isEqualTo 16533
+        expectThat(solve(10, 811589153)) isEqualTo 4789999181006
     }
 
     fun solve(rounds: Int, key: Long): Long {
