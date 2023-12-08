@@ -1,5 +1,6 @@
 package com.dehnes.adventofcode.v2019
 
+import com.dehnes.adventofcode.utils.MathUtils.gcd
 import org.junit.jupiter.api.Test
 import kotlin.math.absoluteValue
 import kotlin.math.sign
@@ -112,4 +113,3 @@ class Day10 {
 
 }
 
-fun gcd(n1: Long, n2: Long): Long = if (n2 != 0L) gcd(n2, n1 % n2) else n1

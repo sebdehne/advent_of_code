@@ -1,5 +1,6 @@
 package com.dehnes.adventofcode.v2019
 
+import com.dehnes.adventofcode.utils.MathUtils.lcm
 import com.dehnes.adventofcode.v2022.Day18.Companion.XYZ
 import com.dehnes.adventofcode.v2022.Day18.Companion.plus
 import org.junit.jupiter.api.Test
@@ -141,4 +142,3 @@ class Day12 {
 
 }
 
-fun lcm(a: Long, b: Long) = (a*b)/gcd(a,b)

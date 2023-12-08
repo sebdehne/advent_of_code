@@ -1,6 +1,6 @@
 package com.dehnes.adventofcode.v2023
 
-import com.dehnes.adventofcode.v2019.lcm
+import com.dehnes.adventofcode.utils.MathUtils.lcm
 import org.junit.jupiter.api.Test
 import java.io.File
 
@@ -18,35 +18,28 @@ class Day08 {
     @Test
     fun run() {
         // part1
-        val part1 = findSteps("AAA") { it == "ZZZ" }
-        check(part1 == 18113L)
+        check(findSteps("AAA") { it == "ZZZ" } == 18113L)
 
         // part2
-        val part2 = data.entries
-            .filter { it.key.endsWith("A") }
-            .map { it.key }
-            .map { findSteps(it) { it.endsWith("Z") } }
-            .fold(1L) { acc, f -> lcm(acc, f) }
-
-        check(part2 == 12315788159977L)
+        check(data.entries
+            .mapNotNull { if (it.key.endsWith("A")) findSteps(it.key) { it.endsWith("Z") } else null }
+            .fold(1L) { acc, f -> lcm(acc, f) } == 12315788159977L)
     }
 
     private fun findSteps(start: String, endReached: (str: String) -> Boolean): Long {
         var steps = 0L
         var current = start
-        var instructionIndex = 0
+        var i = 0
         while (true) {
-            if (endReached(current)) break
-
-            if (instructionIndex == instructions.length) {
-                instructionIndex = 0
+            if (i == instructions.length) {
+                i = 0
             }
-            val next = data[current]!!
-            current = if (instructions[instructionIndex++] == 'R') next.second else next.first
+            current = data[current]!!.let {
+                if (instructions[i++] == 'R') it.second else it.first
+            }
             steps++
+            if (endReached(current)) return steps
         }
-
-        return steps
     }
 
 }
