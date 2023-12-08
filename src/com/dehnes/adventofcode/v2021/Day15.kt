@@ -1,13 +1,12 @@
 package com.dehnes.adventofcode.v2021
 
-import org.junit.jupiter.api.Assertions.assertEquals
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import java.io.File
 import java.util.*
 
 class Day15 {
 
-    val map = File("resources/2021/day15.txt").readLines()
+    val map = getLines()
         .map { it.toList().map { it.toString().toInt() }.toIntArray() }
         .toTypedArray()
 
@@ -29,8 +28,8 @@ class Day15 {
 
     @Test
     fun run() {
-        assertEquals(415, calcLowestRisk(map))
-        assertEquals(2864, calcLowestRisk(grow(map, 5)))
+        check(calcLowestRisk(map) == 415)
+        check(calcLowestRisk(grow(map, 5)) == 2864)
         // total execution time: 240ms
     }
 

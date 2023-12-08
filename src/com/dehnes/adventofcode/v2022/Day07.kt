@@ -1,5 +1,6 @@
 package com.dehnes.adventofcode.v2022
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
@@ -43,7 +44,7 @@ class Day07 {
         val root = File(true, "/")
         var current = root
 
-        inputLines(7).forEach { line ->
+        getLines().forEach { line ->
             when {
                 line == "$ cd .." -> current = current.parent!!
                 line == "$ cd /" -> current = root

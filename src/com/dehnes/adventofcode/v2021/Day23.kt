@@ -33,7 +33,7 @@ class Day23 {
 
         val minScore = calcPart1(grid)
 
-        assertEquals(18282, minScore) // 2min, 10 seconds
+        check(minScore == 18282L) // 2min, 10 seconds
     }
 
     @Test
@@ -61,7 +61,7 @@ class Day23 {
 
         val minScore = calcPart2(grid)
 
-        assertEquals(50132, minScore) // 1min, 43 seconds
+        check(minScore == 50132L) // 1min, 43 seconds
     }
 
     private fun calcPart1(grid: Array<IntArray>): Long? {

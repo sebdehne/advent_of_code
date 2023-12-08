@@ -1,11 +1,11 @@
 package com.dehnes.adventofcode.v2023
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import java.io.File
 
 class Day02 {
 
-    val games = File("resources/2023/day02.txt").readLines().map { line ->
+    val games = getLines().map { line ->
         val (game, d) = line.split(":")
 
         Game(

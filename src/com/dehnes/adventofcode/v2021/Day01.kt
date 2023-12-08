@@ -1,10 +1,10 @@
 package com.dehnes.adventofcode.v2021
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import java.io.File
 
 class Day01 {
-    val input = File("resources/2021/day01.txt").readLines().map(String::toInt)
+    val input = getLines().map(String::toInt)
 
     @Test
     fun run() {
@@ -18,8 +18,8 @@ class Day01 {
             }
         }
 
-        println(countIncrements(1))
-        println(countIncrements(3))
+        check(countIncrements(1) == 1475)
+        check(countIncrements(3) == 1516)
     }
 }
 

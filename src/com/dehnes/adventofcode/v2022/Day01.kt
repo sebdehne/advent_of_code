@@ -1,5 +1,6 @@
 package com.dehnes.adventofcode.v2022
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
@@ -11,7 +12,7 @@ class Day01 {
         val calories = mutableListOf<Long>()
 
         var current = 0L
-        inputLines(1).forEach { line ->
+        getLines().forEach { line ->
             val cal = line.trim().ifBlank { null }?.toLong()
             if (cal == null) {
                 calories.add(current)

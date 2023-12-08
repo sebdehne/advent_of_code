@@ -1,24 +1,16 @@
 package com.dehnes.adventofcode.v2021
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import java.io.File
 import kotlin.math.absoluteValue
-import kotlin.test.assertEquals
 
 class Day07 {
-    val input = File("resources/2021/day07.txt").readLines().first()
-        .split(",").map { it.toInt() }
+    val input = getLines().first().split(",").map { it.toInt() }
 
     @Test
     fun run() {
-        assertEquals(
-            343 to 340987L,
-            costsForAllHeights(input) { it }.minByOrNull { it.second }
-        )
-        assertEquals(
-            478 to 96987874L,
-            costsForAllHeights(input) { (it * (it + 1)) / 2 }.minByOrNull { it.second }
-        )
+        check(costsForAllHeights(input) { it }.minByOrNull { it.second } == 343 to 340987L)
+        check(costsForAllHeights(input) { (it * (it + 1)) / 2 }.minByOrNull { it.second } == 478 to 96987874L)
     }
 
     private fun costsForAllHeights(input: List<Int>, costFn: (Int) -> Int) =

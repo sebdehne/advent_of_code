@@ -1,5 +1,6 @@
 package com.dehnes.adventofcode.v2022
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
@@ -29,7 +30,7 @@ class Day05 {
         val stacks: MutableList<List<Char>> = mutableListOf()
 
         var readingStacks = true
-        inputLines(5).forEach { line ->
+        getLines().forEach { line ->
             if (line.startsWith("move")) {
                 readingStacks = false
             }

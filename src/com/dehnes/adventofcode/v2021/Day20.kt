@@ -1,24 +1,23 @@
 package com.dehnes.adventofcode.v2021
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import java.io.File
-import kotlin.test.assertEquals
 
 class Day20 {
 
-    val mapping = File("resources/2021/day20.txt").readLines().first().mapIndexed { index, c ->
+    val mapping = getLines().first().mapIndexed { index, c ->
         index to (if (c == '#') 1 else 0)
     }.toMap()
 
-    val image = File("resources/2021/day20.txt").readLines().drop(2).map {
+    val image = getLines().drop(2).map {
         it.toList().map { if (it == '#') 1 else 0 }.toIntArray()
     }.toTypedArray()
 
 
     @Test
     fun run() {
-        assertEquals(5619, enhance(2))
-        assertEquals(20122, enhance(50))
+        check(enhance(2) == 5619)
+        check(enhance(50) == 20122)
     }
 
     private fun enhance(times: Int): Int {

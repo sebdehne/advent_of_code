@@ -1,5 +1,6 @@
 package com.dehnes.adventofcode.v2022
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
@@ -14,7 +15,7 @@ class Day20 {
     }
 
     fun solve(rounds: Int, key: Long): Long {
-        val originalNumbers = inputLines(20).map { it.toLong() * key }
+        val originalNumbers = getLines().map { it.toLong() * key }
         val ring = LinkedList<Pair<Int, Long>>()
         originalNumbers.forEachIndexed { index, i ->
             ring.addLast(index to i)

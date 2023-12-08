@@ -1,8 +1,7 @@
 package com.dehnes.adventofcode.v2021
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import java.io.File
-import kotlin.test.assertEquals
 
 class Day12 {
 
@@ -10,12 +9,11 @@ class Day12 {
     fun run() {
 
         val map: MutableMap<String, MutableSet<String>> = mutableMapOf()
-        File("resources/2021/day12.txt")
-            .readLines().forEach { connection ->
-                val (from, to) = connection.split("-").let { it[0] to it[1] }
-                map.getOrPut(from) { mutableSetOf() }.add(to)
-                map.getOrPut(to) { mutableSetOf() }.add(from)
-            }
+        getLines().forEach { connection ->
+            val (from, to) = connection.split("-").let { it[0] to it[1] }
+            map.getOrPut(from) { mutableSetOf() }.add(to)
+            map.getOrPut(to) { mutableSetOf() }.add(from)
+        }
 
         val validPathsPart1 = mutableListOf<List<String>>().apply {
             findPath(listOf("start"), map, this, 1)
@@ -25,8 +23,8 @@ class Day12 {
             findPath(listOf("start"), map, this, 2)
         }
 
-        assertEquals(4549, validPathsPart1.size)
-        assertEquals(120535, validPathsPart2.size)
+        check(validPathsPart1.size == 4549)
+        check(validPathsPart2.size == 120535)
     }
 
     private fun findPath(
@@ -42,6 +40,7 @@ class Day12 {
                     validPaths.add(currentPath + candidate)
                     false
                 }
+
                 candidate.first().isUpperCase() -> true
                 else -> {
                     val nodeOccurrences = currentPath.groupBy { it }.map { it.key to it.value.size }.toMap()

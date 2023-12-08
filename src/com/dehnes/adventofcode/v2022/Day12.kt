@@ -1,5 +1,6 @@
 package com.dehnes.adventofcode.v2022
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
@@ -8,7 +9,7 @@ class Day12 {
 
     @Test
     fun run() {
-        val inputLines = inputLines(12)
+        val inputLines = getLines()
 
         var startPos = 0 to 0
         var dst = 0 to 0

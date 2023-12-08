@@ -1,20 +1,17 @@
 package com.dehnes.adventofcode.v2021
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import java.io.File
-import kotlin.test.assertEquals
 
 class Day08 {
-    val data = File("resources/2021/day08.txt").readLines()
-        .map { it.split("|").let { it[0].trim().split(" ") to it[1].trim().split(" ") } }
+    val data = getLines().map { it.split("|").let { it[0].trim().split(" ") to it[1].trim().split(" ") } }
 
     @Test
     fun part1() {
-        assertEquals(
-            452,
+        check(
             data
                 .map { it.second }
-                .sumOf { it.count { it.length in listOf(2, 3, 4, 7) } }
+                .sumOf { it.count { it.length in listOf(2, 3, 4, 7) } } == 452
         )
     }
 
@@ -76,7 +73,7 @@ class Day08 {
             }.joinToString(separator = "").toLong()
         }
 
-        assertEquals(1096964, total)
+        check(total == 1096964L)
     }
 
     fun List<Char>.minus(other: List<Char>) = this.filterNot { it in other }

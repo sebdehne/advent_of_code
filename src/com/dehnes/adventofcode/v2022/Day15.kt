@@ -1,5 +1,6 @@
 package com.dehnes.adventofcode.v2022
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
@@ -9,7 +10,7 @@ class Day15 {
 
     @Test
     fun run() {
-        val areas = inputLines(15).map { line ->
+        val areas = getLines().map { line ->
             val parts = line.split(" ", ",", "=", ":")
             val sensor = (parts[3].toInt() to parts[6].toInt())
             val beacon = (parts[13].toInt() to parts[16].toInt())

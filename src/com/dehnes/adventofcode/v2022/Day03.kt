@@ -1,5 +1,6 @@
 package com.dehnes.adventofcode.v2022
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
@@ -8,7 +9,7 @@ class Day03 {
 
     @Test
     fun run() {
-        val rucksacks = inputLines(3)
+        val rucksacks = getLines()
 
         val priority = { c: Char ->
             if (c >= 'a') {

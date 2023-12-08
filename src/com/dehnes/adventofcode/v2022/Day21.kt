@@ -1,5 +1,6 @@
 package com.dehnes.adventofcode.v2022
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
@@ -11,7 +12,7 @@ class Day21 {
     @Test
     fun part1() {
         val dependencies = mutableMapOf<String, Any>()
-        inputLines(21).forEach { line ->
+        getLines().forEach { line ->
             val (monkey, task) = line.split(":")
             val parts = task.trim().split(" ")
             if (parts.size == 1) {
@@ -95,7 +96,7 @@ class Day21 {
 
     fun solve(start: String, test: Pair<String, Long>): Long {
         val dependencies = mutableMapOf<String, Any>()
-        inputLines(21).forEach { line ->
+        getLines().forEach { line ->
             val (monkey, task) = line.split(":")
             val parts = task.trim().split(" ")
             if (parts.size == 1) {

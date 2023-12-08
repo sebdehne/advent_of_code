@@ -1,15 +1,13 @@
 package com.dehnes.adventofcode.v2021
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import java.io.File
-import kotlin.test.assertEquals
 
 class Day11 {
 
     @Test
     fun run() {
-        val input = File("resources/2021/day11.txt")
-            .readLines()
+        val input = getLines()
             .map { it.toList().map { it.toString().toInt() }.toTypedArray() }
             .toTypedArray()
 
@@ -39,8 +37,8 @@ class Day11 {
             step++
         }
 
-        assertEquals(1608, flashCounter100Steps)
-        assertEquals(214, synchronousFlashStep)
+        check(flashCounter100Steps == 1608L)
+        check(synchronousFlashStep == 214)
     }
 
     private fun flash(input: Array<Array<Int>>): Set<Pair<Int, Int>> {

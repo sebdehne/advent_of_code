@@ -1,20 +1,18 @@
 package com.dehnes.adventofcode.v2021
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import java.io.File
-import kotlin.test.assertEquals
 
 class Day04 {
 
-    val bingoInputNumbers = File("resources/2021/day04.txt").readLines()
-        .first().split(",").map { it.toInt() }
+    val bingoInputNumbers = getLines().first().split(",").map { it.toInt() }
 
     val boards: List<List<List<Int>>>
 
     init {
         val boards: MutableList<List<List<Int>>> = mutableListOf()
         val currentBoard: MutableList<List<Int>> = mutableListOf()
-        File("resources/2021/day04.txt").readLines().drop(1).forEach { boardLine ->
+        getLines().drop(1).forEach { boardLine ->
             if (boardLine.isBlank()) {
                 if (currentBoard.isNotEmpty()) {
                     boards.add(currentBoard.toMutableList().toList())
@@ -33,8 +31,8 @@ class Day04 {
 
     @Test
     fun run() {
-        assertEquals(21607, getScoreAtWin(getAllWins().first()))
-        assertEquals(19012, getScoreAtWin(getAllWins().last()))
+        check(getScoreAtWin(getAllWins().first()) == 21607)
+        check(getScoreAtWin(getAllWins().last()) == 19012)
     }
 
     fun getScoreAtWin(run: Int): Int {

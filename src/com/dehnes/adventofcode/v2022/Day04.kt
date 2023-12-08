@@ -1,5 +1,6 @@
 package com.dehnes.adventofcode.v2022
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
@@ -11,7 +12,7 @@ class Day04 {
         var part1 = 0L
         var part2 = 0L
 
-        inputLines(4).forEach { line ->
+        getLines().forEach { line ->
             val sections = line.split(",", "-").map { it.toInt() }
             val p1 = sections[0]..sections[1]
             val p2 = sections[2]..sections[3]

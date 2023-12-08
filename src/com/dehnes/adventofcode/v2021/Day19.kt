@@ -1,9 +1,8 @@
 package com.dehnes.adventofcode.v2021
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import java.io.File
 import kotlin.math.absoluteValue
-import kotlin.test.assertEquals
 
 class Day19 {
 
@@ -28,6 +27,7 @@ class Day19 {
             other.y + y,
             other.z + z,
         )
+
         infix operator fun minus(other: PointInSpace) = PointInSpace(
             other.x - x,
             other.y - y,
@@ -186,7 +186,8 @@ class Day19 {
         var maxDistance = 0
         relatives.toList().forEach { l ->
             relatives.toList().forEach { r ->
-                val d = (l.second.x - r.second.x).absoluteValue + (l.second.y - r.second.y).absoluteValue + (l.second.z - r.second.z).absoluteValue
+                val d =
+                    (l.second.x - r.second.x).absoluteValue + (l.second.y - r.second.y).absoluteValue + (l.second.z - r.second.z).absoluteValue
                 if (d > maxDistance) {
                     maxDistance = d
                 }
@@ -194,15 +195,15 @@ class Day19 {
         }
 
 
-        assertEquals(408, totalBeacons.size)
-        assertEquals(13348, maxDistance)
+        check(totalBeacons.size == 408)
+        check(maxDistance == 13348)
     }
 
     private fun readData(): List<Scanner> {
         val result = mutableListOf<Scanner>()
         var currentScanner = -1
         val currentBeacons = mutableListOf<PointInSpace>()
-        File("resources/2021/day19.txt").readLines().forEach { line ->
+        getLines().forEach { line ->
             if (line.startsWith("--- scanner ")) {
                 if (currentBeacons.isNotEmpty()) {
                     result.add(

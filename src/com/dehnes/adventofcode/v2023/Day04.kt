@@ -1,13 +1,14 @@
 package com.dehnes.adventofcode.v2023
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import java.io.File
 import kotlin.math.pow
 
 class Day04 {
-    val data = File("resources/2023/day04.txt").readLines().map {
+    val data = getLines().map {
         val (left, right) = it.split(":", limit = 2).last().split("|")
-        (left.trim().split(" ").filter { it.isNotBlank() }.map { it.toInt() }) to (right.trim().split(" ").filter { it.isNotBlank() }.map { it.toInt() })
+        (left.trim().split(" ").filter { it.isNotBlank() }.map { it.toInt() }) to (right.trim().split(" ")
+            .filter { it.isNotBlank() }.map { it.toInt() })
     }
 
     @Test
@@ -21,7 +22,7 @@ class Day04 {
         }
 
         val part1 = points.sum()
-        check( part1 == 28538)
+        check(part1 == 28538)
     }
 
 
@@ -41,9 +42,9 @@ class Day04 {
             val cardsOwned = owning[game]!!
             var cnt = winning
             var current = game + 1
-            while(cnt-- > 0) {
+            while (cnt-- > 0) {
                 owning[current] = owning[current]!! + cardsOwned
-                current ++
+                current++
             }
         }
 

@@ -1,5 +1,6 @@
 package com.dehnes.adventofcode.v2022
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
@@ -19,7 +20,7 @@ class Day09 {
         val visited = mutableSetOf<Pair<Int, Int>>()
         visited.add(p[0])
 
-        inputLines(9).forEach { line ->
+        getLines().forEach { line ->
             val (direction, steps) = line.split(" ")
 
             repeat(steps.toInt()) {

@@ -1,13 +1,11 @@
 package com.dehnes.adventofcode.v2023
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import java.io.File
 
 class Day03 {
 
-    val map = File("resources/2023/day03.txt").readLines().map {
-        it.toCharArray()
-    }.toTypedArray()
+    val map = getLines().map { it.toCharArray() }.toTypedArray()
 
     fun surroundingSymbols(x: Int, y: Int) = listOf(
         y - 1 to x - 1,

@@ -1,14 +1,13 @@
 package com.dehnes.adventofcode.v2021
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import java.io.File
-import kotlin.test.assertEquals
 
 class Day25 {
 
     @Test
     fun test() {
-        var map = File("resources/2021/day25.txt").readLines().map { line ->
+        var map = getLines().map { line ->
             line.toList().toCharArray()
         }.toTypedArray()
 
@@ -22,7 +21,7 @@ class Day25 {
             map = updatedMap
         }
 
-        assertEquals(360, steps)
+        check(steps == 360L)
 
     }
 

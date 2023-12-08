@@ -1,12 +1,11 @@
 package com.dehnes.adventofcode.v2021
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import java.io.File
-import kotlin.test.assertEquals
 
 class Day09 {
 
-    val input = File("resources/2021/day09.txt").readLines()
+    val input = getLines()
         .map { it.toList().map { it.toString().toInt() }.toTypedArray() }.toTypedArray()
 
     @Test
@@ -32,8 +31,8 @@ class Day09 {
             .reversed().subList(0, 3)
             .fold(1) { acc, i -> acc * i.second }
 
-        assertEquals(535, part1)
-        assertEquals(1122700, part2)
+        check(part1 == 535)
+        check(part2 == 1122700)
     }
 
     private fun findBasin(row: Int, column: Int, alreadyVisited: MutableSet<Pair<Int, Int>> = mutableSetOf()): Int {

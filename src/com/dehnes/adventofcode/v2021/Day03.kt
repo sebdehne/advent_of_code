@@ -1,13 +1,11 @@
 package com.dehnes.adventofcode.v2021
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import java.io.File
 
 class Day03 {
 
-    val input = File("resources/2021/day03.txt").readLines().map {
-        it.toList().map { it.toString().toInt() }
-    }
+    val input = getLines().map { it.toList().map { it.toString().toInt() } }
 
     @Test
     fun run() {
@@ -23,7 +21,7 @@ class Day03 {
 
         val g = gamma.joinToString(separator = "").toInt(2)
         val e = epsilon.joinToString(separator = "").toInt(2)
-        println(g * e) // 3923414
+        check(g * e == 3923414)
     }
 
 
@@ -51,6 +49,6 @@ class Day03 {
 
         val oxygen = calc(input, true)
         val co2 = calc(input, false)
-        println(oxygen * co2) // 5852595
+        check(oxygen * co2 == 5852595)
     }
 }

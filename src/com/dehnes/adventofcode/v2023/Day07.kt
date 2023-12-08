@@ -1,11 +1,9 @@
 package com.dehnes.adventofcode.v2023
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import java.io.File
 
 class Day07 {
-
-    val lines = File("resources/2023/day07.txt").readLines()
 
     @Test
     fun run() {
@@ -16,7 +14,7 @@ class Day07 {
         check(calc("AKQT98765432J", ::calcTypeV2) == 248781813L)
     }
 
-    private fun calc(cardToRankPart: String, handToType: (h: List<Char>) -> Type) = lines
+    private fun calc(cardToRankPart: String, handToType: (h: List<Char>) -> Type) = getLines()
         .map { line ->
             val (handStr, bid) = line.split(" ")
             handStr.toList().let { Hand(it, handToType(it)) } to bid.toLong()

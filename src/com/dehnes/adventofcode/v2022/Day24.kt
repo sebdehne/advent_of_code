@@ -1,5 +1,6 @@
 package com.dehnes.adventofcode.v2022
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
@@ -10,7 +11,7 @@ class Day24 {
     @Test
     fun run() {
         val gridTmp = mutableListOf<Array<GridPoint>>()
-        inputLines(24).forEachIndexed { index, line ->
+        getLines().forEachIndexed { index, line ->
             if (!line.contains("###")) {
                 line.toList().drop(1).dropLast(1).map { c ->
                     when (c) {
@@ -41,7 +42,7 @@ class Day24 {
 
         expectThat(stepsPart1) isEqualTo 242
 
-        val stepsPart2 =walkValey(
+        val stepsPart2 = walkValey(
             maxY + 1 to maxX,
             0 to 0,
             grid,
@@ -54,7 +55,8 @@ class Day24 {
             maxY to maxX,
             grid,
             maxY,
-            maxX)
+            maxX
+        )
 
         val final = stepsPart1 + stepsPart2 + stepsPart3
 

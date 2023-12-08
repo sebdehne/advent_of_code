@@ -1,5 +1,6 @@
 package com.dehnes.adventofcode.v2022
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
@@ -9,7 +10,7 @@ class Day13 {
 
     @Test
     fun run() {
-        val pairs = inputLines(13).filterNot { it.isBlank() }.chunked(2).map {
+        val pairs = getLines().filterNot { it.isBlank() }.chunked(2).map {
             mapElements(parse(it[0])) to mapElements(parse(it[1]))
         }
 

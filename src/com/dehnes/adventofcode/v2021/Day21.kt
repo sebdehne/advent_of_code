@@ -1,7 +1,6 @@
 package com.dehnes.adventofcode.v2021
 
 import org.junit.jupiter.api.Test
-import kotlin.test.assertEquals
 
 class Day21 {
 
@@ -34,13 +33,13 @@ class Day21 {
             if (player2.second >= 1000) break
         }
 
-        assertEquals(908595, dieCount * player2.second)
+        check(dieCount * player2.second == 908595)
     }
 
     @Test
     fun part2() {
         val result = calcWinningUniverses(Pair(4, 0), Pair(2, 0))
-        assertEquals(91559198282731L, result.first)
+        check(result.first == 91559198282731L)
     }
 
     private fun calcWinningUniverses(player1: Pair<Int, Int>, player2: Pair<Int, Int>): Pair<Long, Long> {

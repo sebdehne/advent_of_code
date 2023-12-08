@@ -1,5 +1,6 @@
 package com.dehnes.adventofcode.v2022
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
 
 class Day17 {
@@ -43,7 +44,7 @@ class Day17 {
 
     @Test
     fun run() {
-        val jets = inputLines(17).first().toCharArray()
+        val jets = getLines().first().toCharArray()
 
         var removedLines = 0L
         val heights = IntArray(7) { 0 }

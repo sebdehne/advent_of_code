@@ -1,12 +1,11 @@
 package com.dehnes.adventofcode.v2021
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import java.io.File
 import kotlin.math.ceil
-import kotlin.test.assertEquals
 
 class Day18 {
-    val input = File("resources/2021/day18.txt").readLines()
+    val input = getLines()
 
     @Test
     fun run() {
@@ -17,7 +16,7 @@ class Day18 {
         val snailfishNumber = SnailfishNumber.parse(result) as SnailfishNumberPair
 
         // part 1
-        assertEquals(3216, snailfishNumber.magnitude())
+        check(snailfishNumber.magnitude() == 3216L)
 
         var highest: Long = 0
         input.forEach { numberA ->
@@ -40,7 +39,7 @@ class Day18 {
         }
 
         // part 2
-        assertEquals(4643, highest)
+        check(highest == 4643L)
 
     }
 

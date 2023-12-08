@@ -1,14 +1,13 @@
 package com.dehnes.adventofcode.v2021
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import java.io.File
 import java.util.*
-import kotlin.test.assertEquals
 
 
 class Day24 {
 
-    val variables = File("resources/2021/day24.txt").readLines().let { lines ->
+    val variables = getLines().let { lines ->
         val v = Array(14) { IntArray(3) }
         (0..13).forEach { group ->
             v[group][0] = lines[(18 * group) + 4].split("z")[1].trim().toInt()
@@ -20,8 +19,8 @@ class Day24 {
 
     @Test
     fun run() {
-        assertEquals(94992992796199, calc(true))
-        assertEquals(11931881141161, calc(false))
+        check(calc(true) == 94992992796199)
+        check(calc(false) == 11931881141161)
     }
 
     private fun calc(highest: Boolean): Long {

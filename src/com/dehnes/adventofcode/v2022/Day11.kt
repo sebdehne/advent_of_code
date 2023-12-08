@@ -1,5 +1,6 @@
 package com.dehnes.adventofcode.v2022
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
@@ -37,7 +38,7 @@ class Day11 {
     private fun parse(): MutableList<Monkey> {
         val monkes = mutableListOf<Monkey>()
         var currentMonkey = Monkey(LinkedList(), { it }, 1, 0, 0)
-        inputLines(11).forEach { line ->
+        getLines().forEach { line ->
             if (line.isEmpty()) {
                 monkes.add(currentMonkey)
                 currentMonkey = Monkey(LinkedList(), { it }, 1, 0, 0)

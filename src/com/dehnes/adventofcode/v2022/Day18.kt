@@ -1,12 +1,13 @@
 package com.dehnes.adventofcode.v2022
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
 
 class Day18 {
 
-    val points = inputLines(18).map { line ->
+    val points = getLines().map { line ->
         val (x, y, z) = line.split(",").map { it.toInt() }
         Point3D(XYZ(x, y, z))
     }

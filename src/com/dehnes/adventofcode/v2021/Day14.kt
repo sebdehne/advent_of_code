@@ -1,24 +1,23 @@
 package com.dehnes.adventofcode.v2021
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import java.io.File
-import kotlin.test.assertEquals
 
 class Day14 {
 
-    val initialPairList = File("resources/2021/day14.txt").readLines().first().trim().toList().zipWithNext()
+    val initialPairList = getLines().first().trim().toList().zipWithNext()
     val rules = Array(26) { CharArray(26) { '0' } }
 
     init {
-        File("resources/2021/day14.txt").readLines().filter { it.contains(" -> ") }
+        getLines().filter { it.contains(" -> ") }
             .map { it.split(" -> ").let { it[0].let { it.first() to it.last() } to it[1].first() } }
             .forEach { (pair, insertChar) -> rules[pair.first.code - 65][pair.second.code - 65] = insertChar }
     }
 
     @Test
     fun test() {
-        assertEquals(3555, getScoreFor(10))
-        assertEquals(4439442043739, getScoreFor(40))
+        check(getScoreFor(10) == 3555L)
+        check(getScoreFor(40) == 4439442043739L)
     }
 
     private fun getScoreFor(times: Int): Long {

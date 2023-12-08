@@ -1,5 +1,6 @@
 package com.dehnes.adventofcode.v2021
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
 import java.io.File
 import kotlin.math.max
@@ -8,8 +9,7 @@ class Day13 {
 
     var maxX = 0
     var maxY = 0
-    val map = File("resources/2021/day13.txt")
-        .readLines().filterNot { it.startsWith("fold") }
+    val map = getLines().filterNot { it.startsWith("fold") }
         .filterNot { it.isBlank() }
         .map {
             it.split(",").let {

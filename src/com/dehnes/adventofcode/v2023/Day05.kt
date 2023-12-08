@@ -1,17 +1,15 @@
 package com.dehnes.adventofcode.v2023
 
+import com.dehnes.adventofcode.utils.ParserUtils.getText
 import com.dehnes.adventofcode.utils.RangeUtils.combine
 import com.dehnes.adventofcode.utils.RangeUtils.offset
 import com.dehnes.adventofcode.utils.RangeUtils.overlaps
 import org.junit.jupiter.api.Test
-import java.io.File
-import java.nio.charset.StandardCharsets
 import java.util.*
 
 class Day05 {
 
-    val data = File("resources/2023/day05.txt").readText(StandardCharsets.UTF_8)
-    val sections = data.split("\n\n")
+    val sections = getText().split("\n\n")
     val seedNumbers = sections[0].split(": ")[1].split(" ").map { it.trim().toLong() }
     val mappings = sections.drop(1).map { parseMappings(it) }
 

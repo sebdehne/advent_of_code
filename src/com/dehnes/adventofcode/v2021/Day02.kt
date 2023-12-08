@@ -1,11 +1,11 @@
 package com.dehnes.adventofcode.v2021
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import java.io.File
 
 class Day02 {
 
-    val input = File("resources/2021/day02.txt").readLines().map {
+    val input = getLines().map {
         it.split(" ").let {
             it[0] to it[1].toInt()
         }
@@ -39,13 +39,9 @@ class Day02 {
 
     @Test
     fun run() {
-        println(
-            calc(input, intArrayOf(0, 0), this::instructions1)
-        ) // 1692075
+        check(calc(input, intArrayOf(0, 0), this::instructions1) == 1692075)
 
-        println(
-            calc(input, intArrayOf(0, 0, 0), this::instructions2)
-        ) // 1749524700
+        check(calc(input, intArrayOf(0, 0, 0), this::instructions2) == 1749524700)
     }
 
 }

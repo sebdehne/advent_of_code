@@ -1,7 +1,7 @@
 package com.dehnes.adventofcode.v2023
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import java.io.File
 
 class Day01 {
 
@@ -11,7 +11,7 @@ class Day01 {
         check(calc(part2 = true) == 55358L)
     }
 
-    private fun calc(part2: Boolean) = File("resources/2023/day01.txt").readLines().map {
+    private fun calc(part2: Boolean) = getLines().map {
         val indexToDigit = mutableListOf<Pair<Int, Int>>()
         it.forEachIndexed { index, c ->
             if (c.isDigit()) {

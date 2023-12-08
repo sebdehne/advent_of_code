@@ -1,5 +1,6 @@
 package com.dehnes.adventofcode.v2022
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import com.dehnes.adventofcode.v2022.Directions.*
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
@@ -16,7 +17,7 @@ class Day23 {
         val grid = Array(height) { CharArray(width) { '.' } }
         val elfes = mutableListOf<Point>()
 
-        inputLines(23).forEachIndexed { y, line ->
+        getLines().forEachIndexed { y, line ->
             line.forEachIndexed { x, c ->
                 if (c == '#') {
                     grid[y + offset.first][x + offset.second] = '#'
@@ -62,7 +63,7 @@ class Day23 {
         val grid = Array(height) { CharArray(width) { '.' } }
         val elfes = mutableListOf<Point>()
 
-        inputLines(23).forEachIndexed { y, line ->
+        getLines().forEachIndexed { y, line ->
             line.forEachIndexed { x, c ->
                 if (c == '#') {
                     grid[y + offset.first][x + offset.second] = '#'

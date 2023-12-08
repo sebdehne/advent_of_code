@@ -1,5 +1,6 @@
 package com.dehnes.adventofcode.v2022
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
@@ -14,7 +15,7 @@ class Day10 {
         var crtPos = 0 to 0
         var currentCycle = 1L
 
-        inputLines(10).forEach { line: String ->
+        getLines().forEach { line: String ->
             val parts = line.split(" ")
             val value = if (parts.size > 1) parts[1].toInt() else 0
 

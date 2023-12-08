@@ -1,13 +1,14 @@
 package com.dehnes.adventofcode.v2023
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import java.io.File
 
 class Day06 {
 
     @Test
     fun part1() {
-        val data = File("resources/2023/day06.txt").readLines()
+        val data = getLines()
+            .dropLast(1)
             .map { it.split(":")[1].trim() }
             .map {
                 it.split(" ")
@@ -27,7 +28,8 @@ class Day06 {
 
     @Test
     fun part2() {
-        val data = File("resources/2023/day06.txt").readLines()
+        val data = getLines()
+            .dropLast(1)
             .map { it.split(":")[1].trim() }
             .map {
                 it.split(" ")

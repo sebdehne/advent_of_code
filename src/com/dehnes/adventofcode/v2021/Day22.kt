@@ -1,10 +1,9 @@
 package com.dehnes.adventofcode.v2021
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import java.io.File
 import java.lang.Integer.max
 import java.lang.Integer.min
-import kotlin.test.assertEquals
 
 class Day22 {
 
@@ -74,11 +73,11 @@ class Day22 {
     }
 
     @Test
-    fun part2() {
-        val instructions = File("resources/2021/day22.txt").readLines().map(this::parseLine)
+    fun run() {
+        val instructions = getLines().map(this::parseLine)
 
-        assertEquals(610196, calc(instructions.subList(0, 20))) // part1
-        assertEquals(1282401587270826, calc(instructions)) // part2
+        check(calc(instructions.subList(0, 20)) == 610196L) // part1
+        check(calc(instructions) == 1282401587270826L) // part2
     }
 
     private fun calc(instructions: List<Pair<Boolean, Cuboid>>) =

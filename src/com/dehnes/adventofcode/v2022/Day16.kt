@@ -1,6 +1,7 @@
 package com.dehnes.adventofcode.v2022
 
 import com.dehnes.adventofcode.utils.Dijkstra
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
@@ -11,7 +12,7 @@ class Day16 {
 
     init {
         val mapTmp = mutableMapOf<String, Valve>()
-        inputLines(16).forEach { line ->
+        getLines().forEach { line ->
             val parts = line.split(" ", ";", "=", ",").filter { it.isNotBlank() }
             mapTmp[parts[1]] = Valve(
                 parts[1],
@@ -160,9 +161,11 @@ class Day16 {
                     val last = p.actionsMe.lastOrNull()
                     if (last is TimedWalk) {
                         // open
-                        nextPaths.add(p.copy(
-                            actionsMe = p.actionsMe + TimedOpen(last.to, 1)
-                        ))
+                        nextPaths.add(
+                            p.copy(
+                                actionsMe = p.actionsMe + TimedOpen(last.to, 1)
+                            )
+                        )
                     } else {
                         // walk
                         val walk = p.actionsMe.lastOrNull { it is TimedWalk } as? TimedWalk
@@ -180,10 +183,12 @@ class Day16 {
                             nextPaths.add(p.copy(actionsMe = p.actionsMe + TimedWait(remainingTime)))
                         } else {
                             candidates.forEach { (dst, dist) ->
-                                nextPaths.add(p.copy(
-                                    actionsMe = p.actionsMe + TimedWalk(pos, dst, dist, dist),
-                                    valuesTaken = p.valuesTaken + dst
-                                ))
+                                nextPaths.add(
+                                    p.copy(
+                                        actionsMe = p.actionsMe + TimedWalk(pos, dst, dist, dist),
+                                        valuesTaken = p.valuesTaken + dst
+                                    )
+                                )
                             }
                         }
                     }
@@ -193,9 +198,11 @@ class Day16 {
                     val last = p.actionsEl.lastOrNull()
                     if (last is TimedWalk) {
                         // open
-                        nextPaths.add(p.copy(
-                            actionsEl = p.actionsEl + TimedOpen(last.to, 1)
-                        ))
+                        nextPaths.add(
+                            p.copy(
+                                actionsEl = p.actionsEl + TimedOpen(last.to, 1)
+                            )
+                        )
                     } else {
                         // walk
                         val walk = p.actionsEl.lastOrNull { it is TimedWalk } as? TimedWalk
@@ -213,10 +220,12 @@ class Day16 {
                             nextPaths.add(p.copy(actionsEl = p.actionsEl + TimedWait(remainingTime)))
                         } else {
                             candidates.forEach { (dst, dist) ->
-                                nextPaths.add(p.copy(
-                                    actionsEl = p.actionsEl + TimedWalk(pos, dst, dist, dist),
-                                    valuesTaken = p.valuesTaken + dst
-                                ))
+                                nextPaths.add(
+                                    p.copy(
+                                        actionsEl = p.actionsEl + TimedWalk(pos, dst, dist, dist),
+                                        valuesTaken = p.valuesTaken + dst
+                                    )
+                                )
                             }
                         }
                     }

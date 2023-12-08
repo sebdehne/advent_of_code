@@ -1,21 +1,20 @@
 package com.dehnes.adventofcode.v2021
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import java.io.File
 import java.lang.Integer.max
 import kotlin.math.sign
-import kotlin.test.assertEquals
 
 class Day05 {
 
-    val input = File("resources/2021/day05.txt").readLines()
+    val input = getLines()
         .map { it.split("\\D".toRegex()).filterNot { it.isBlank() } }
         .map { (it[0].toInt() to it[1].toInt()) to (it[2].toInt() to it[3].toInt()) }
 
     @Test
     fun test() {
-        assertEquals(4421, countIntersections(input.filter { it.isStrait() }))
-        assertEquals(18674, countIntersections(input))
+        check(countIntersections(input.filter { it.isStrait() }) == 4421)
+        check(countIntersections(input) == 18674)
     }
 
     fun countIntersections(input: List<Pair<Pair<Int, Int>, Pair<Int, Int>>>): Int {

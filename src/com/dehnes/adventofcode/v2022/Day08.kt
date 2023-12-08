@@ -1,12 +1,13 @@
 package com.dehnes.adventofcode.v2022
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
 
 class Day08 {
 
-    val lines = inputLines(8)
+    val lines = getLines()
     val width = lines[0].length
     val grid: Array<IntArray> = Array(lines.size) { IntArray(width) { -1 } }
 

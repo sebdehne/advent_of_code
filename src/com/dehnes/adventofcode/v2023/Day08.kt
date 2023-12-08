@@ -1,15 +1,14 @@
 package com.dehnes.adventofcode.v2023
 
 import com.dehnes.adventofcode.utils.MathUtils.lcm
+import com.dehnes.adventofcode.utils.ParserUtils.getText
 import org.junit.jupiter.api.Test
-import java.io.File
 
 
 class Day08 {
 
-    val text = File("resources/2023/day08.txt").readText()
-    val instructions = text.split("\n\n")[0]
-    val data = text.split("\n\n")[1].lines().associate { line ->
+    val instructions = getText().split("\n\n")[0]
+    val data = getText().split("\n\n")[1].lines().associate { line ->
         val (l, r) = line.split("=").map { it.trim() }
         val (left, right) = r.split(",").map { it.replace("(", "").replace(")", "").trim() }
         l to (left to right)

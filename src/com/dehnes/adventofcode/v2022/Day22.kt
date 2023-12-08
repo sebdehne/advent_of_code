@@ -1,5 +1,6 @@
 package com.dehnes.adventofcode.v2022
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
@@ -12,7 +13,7 @@ class Day22 {
 
         val instructions = mutableListOf<Instruction2>()
         var readingInstructions = false
-        inputLines(22).forEach { line ->
+        getLines().forEach { line ->
 
             if (!readingInstructions) {
                 if (line.isBlank()) {
@@ -135,15 +136,15 @@ class Day22 {
             WrappingSpec(3, 0, 2) { p -> (gridSize to (p.first)) to 3 },
             WrappingSpec(3, 2, 4) { p -> (0 to p.first) to 1 },
 
-            WrappingSpec(4, 2, 1) {p -> ((gridSize - p.first) to 0) to 0},
-            WrappingSpec(4, 3, 3) {p -> (p.second to 0) to 0},
+            WrappingSpec(4, 2, 1) { p -> ((gridSize - p.first) to 0) to 0 },
+            WrappingSpec(4, 3, 3) { p -> (p.second to 0) to 0 },
 
-            WrappingSpec(5, 0, 2) {p -> ((gridSize - p.first) to gridSize) to 2},
-            WrappingSpec(5, 1, 6) {p -> (p.second to gridSize) to 2},
+            WrappingSpec(5, 0, 2) { p -> ((gridSize - p.first) to gridSize) to 2 },
+            WrappingSpec(5, 1, 6) { p -> (p.second to gridSize) to 2 },
 
-            WrappingSpec(6, 0, 5) {p -> (gridSize to p.first) to 3},
-            WrappingSpec(6, 1, 2) {p -> (0 to p.second) to 1},
-            WrappingSpec(6, 2, 1) {p -> (0 to p.first) to 1},
+            WrappingSpec(6, 0, 5) { p -> (gridSize to p.first) to 3 },
+            WrappingSpec(6, 1, 2) { p -> (0 to p.second) to 1 },
+            WrappingSpec(6, 2, 1) { p -> (0 to p.first) to 1 },
         )
 
         val password = solvePart2(gridSpecs, wrapSpecs)
@@ -159,7 +160,7 @@ class Day22 {
 
         val instructions = mutableListOf<Instruction2>()
         var readingInstructions = false
-        inputLines(22).forEach { line ->
+        getLines().forEach { line ->
 
             if (!readingInstructions) {
                 if (line.isBlank()) {

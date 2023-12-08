@@ -1,12 +1,11 @@
 package com.dehnes.adventofcode.v2021
 
-import org.junit.jupiter.api.Assertions.assertEquals
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import java.io.File
 
 class Day16 {
 
-    val input = File("resources/2021/day16.txt").readLines().map {
+    val input = getLines().map {
         it.toList().joinToString("") {
             it.toString().let { Integer.parseInt(it, 16) }.let { Integer.toBinaryString(it).padStart(4, '0') }
         }
@@ -16,8 +15,8 @@ class Day16 {
     fun run() {
         val packet = parsePacket(0)
 
-        assertEquals(949, countVersions(packet))
-        assertEquals(1114600142730, calc(packet))
+        check(countVersions(packet) == 949L)
+        check(calc(packet) == 1114600142730L)
     }
 
     private fun calc(packet: Packet): Long = when (packet) {

@@ -1,16 +1,17 @@
 package com.dehnes.adventofcode.v2022
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
-import java.util.LinkedList
+import java.util.*
 import kotlin.math.pow
 
 class Day25 {
 
     @Test
     fun run() {
-        val sum = inputLines(25).sumOf { line ->
+        val sum = getLines().sumOf { line ->
 
             val digits = line.toList().map { c ->
                 when (c) {
@@ -58,14 +59,16 @@ class Day25 {
                 extra++
                 v += -5
             }
-            result.add(when(v) {
-                -2 -> '='
-                -1 -> '-'
-                0 -> '0'
-                1 -> '1'
-                2 -> '2'
-                else -> error("")
-            })
+            result.add(
+                when (v) {
+                    -2 -> '='
+                    -1 -> '-'
+                    0 -> '0'
+                    1 -> '1'
+                    2 -> '2'
+                    else -> error("")
+                }
+            )
         }
         if (extra > 0) {
             result.add('1')

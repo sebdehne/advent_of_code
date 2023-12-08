@@ -1,13 +1,12 @@
 package com.dehnes.adventofcode.v2021
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import java.io.File
 import java.util.*
-import kotlin.test.assertEquals
 
 class Day10 {
 
-    val input = File("resources/2021/day10.txt").readLines()
+    val input = getLines()
 
     val pairs = mapOf(
         '(' to ')',
@@ -61,7 +60,7 @@ class Day10 {
 
         val scoreCompleted = completedLinesScores[completedLinesScores.size / 2]
 
-        assertEquals(415953, scoreIncomplete)
-        assertEquals(2292863731, scoreCompleted)
+        check(scoreIncomplete == 415953)
+        check(scoreCompleted == 2292863731)
     }
 }

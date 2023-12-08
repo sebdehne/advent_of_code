@@ -1,5 +1,6 @@
 package com.dehnes.adventofcode.v2022
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
@@ -46,7 +47,7 @@ class Day14 {
             }
         }
 
-        inputLines(14).forEach { line ->
+        getLines().forEach { line ->
             line.split(" -> ").windowed(2, 1).forEach { (from, to) ->
                 addLine(
                     from.split(",").let { (l, r) -> l.toInt() to r.toInt() },

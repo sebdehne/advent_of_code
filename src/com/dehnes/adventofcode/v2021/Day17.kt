@@ -1,7 +1,6 @@
 package com.dehnes.adventofcode.v2021
 
 import org.junit.jupiter.api.Test
-import kotlin.test.assertEquals
 
 class Day17 {
     //val targetX = 20..30
@@ -32,8 +31,8 @@ class Day17 {
             }
         }
 
-        assertEquals(5253, highestY)
-        assertEquals(1770, initials.size)
+        check(highestY == 5253)
+        check(initials.size == 1770)
     }
 
     private fun findXCandidates(): List<Int> {
