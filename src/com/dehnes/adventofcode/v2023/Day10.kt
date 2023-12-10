@@ -1,26 +1,28 @@
 package com.dehnes.adventofcode.v2023
 
+import com.dehnes.adventofcode.utils.DirectionInt
+import com.dehnes.adventofcode.utils.DirectionInt.Companion.all90DegreesDirections
+import com.dehnes.adventofcode.utils.DirectionInt.Companion.create
 import com.dehnes.adventofcode.utils.ParserUtils.getLines
-import com.dehnes.adventofcode.v2022.Point
-import com.dehnes.adventofcode.v2022.plus
+import com.dehnes.adventofcode.utils.PointInt
 import org.junit.jupiter.api.Test
 
 class Day10 {
 
     enum class Pipe(
-        val entry1: Point,
-        val entry2: Point,
+        val entry1: DirectionInt,
+        val entry2: DirectionInt,
     ) {
-        `|`(0 to 1, 0 to -1),
-        `-`(1 to 0, -1 to 0),
-        `L`(0 to 1, -1 to 0),
-        `J`(0 to 1, 1 to 0),
-        `7`(0 to -1, 1 to 0),
-        `F`(0 to -1, -1 to 0),
-        `S`(0 to 0, 0 to 0),
+        `|`((0 to 1).create(), (0 to -1).create()),
+        `-`((1 to 0).create(), (-1 to 0).create()),
+        `L`((0 to 1).create(), (-1 to 0).create()),
+        `J`((0 to 1).create(), (1 to 0).create()),
+        `7`((0 to -1).create(), (1 to 0).create()),
+        `F`((0 to -1).create(), (-1 to 0).create()),
+        `S`((0 to 0).create(), (0 to 0).create()),
     }
 
-    var sLoc: Point = 0 to 0
+    var startPosition: PointInt = PointInt(0, 0)
     val grid = getLines().mapIndexed { y, line ->
         line.toList().mapIndexed { x, c ->
 
@@ -28,34 +30,28 @@ class Day10 {
                 null
             } else {
                 if (c == 'S') {
-                    sLoc = x to y
+                    startPosition = PointInt(x, y)
                 }
                 Pipe.valueOf(c.toString())
             }
         }.toTypedArray()
     }.toTypedArray()
-    val gridEnd = grid[0].size to grid.size
+    val gridEnd = PointInt(grid[0].size, grid.size)
 
-
-    @Test
-    fun part1() {
-
-        fun <T> neighbours(pos: Point, fn: (dir: Point, newPos: Point) -> T?) = listOf(
-            1 to 0,
-            0 to 1,
-            -1 to 0,
-            0 to -1
-        ).mapNotNull { direction ->
-            val p = pos + direction
-            if (p.first < 0 || p.second < 0 || p.first >= gridEnd.first || p.second >= gridEnd.second) {
+    private fun <T> PointInt.neighbours(fn: (dir: DirectionInt, newPos: PointInt) -> T?) = all90DegreesDirections()
+        .mapNotNull { direction ->
+            val p = this.moveTo(direction)
+            if (!p.isPartOfGrid(grid)) {
                 null
             } else {
                 fn(direction, p)
             }
         }
 
-        val startDirections = neighbours(sLoc) { dir, newPos ->
-            val pipe = grid[newPos.second][newPos.first]
+    @Test
+    fun part1() {
+        val possibleStartDirections = startPosition.neighbours { dir, newPos ->
+            val pipe = newPos.getFromGrid(grid)
             if (pipe == null) null else {
                 if (pipe.entry1 == dir || pipe.entry2 == dir) {
                     dir
@@ -64,24 +60,24 @@ class Day10 {
         }
 
         // pick a start-direction
-        val startDirection = startDirections[1]
+        val startDirection = possibleStartDirections[1]
 
-        val pathCurrentPosToExit = mutableListOf<Pair<Point, Point>>()
+        // record the path and the direction
+        val pathCurrentPosToExit = mutableListOf<Pair<PointInt, DirectionInt>>()
 
-        var currentPos = sLoc
+        var currentPos = startPosition
         var steps = 0
         var nextDirection = startDirection
-
         pathCurrentPosToExit.add(currentPos to nextDirection)
 
         while (true) {
 
             currentPos += nextDirection
-            if (currentPos == sLoc) {
+            if (currentPos == startPosition) {
                 // reached back to start
                 break
             }
-            val pipe = grid[currentPos.second][currentPos.first]!!
+            val pipe = currentPos.getFromGrid(grid)!!
             steps++
 
             nextDirection = if (pipe.entry1 == nextDirection) {
@@ -100,7 +96,7 @@ class Day10 {
         val path = pathCurrentPosToExit.map { it.first }.toSet()
         grid.indices.forEach { y ->
             grid[0].indices.forEach { x ->
-                val pos = x to y
+                val pos = PointInt(x, y)
                 if (grid[y][x] != null && pos !in path) {
                     grid[y][x] = null
                 }
@@ -108,17 +104,17 @@ class Day10 {
         }
 
 
-        // group all empty tiles together
-        val groups = mutableListOf<MutableSet<Point>>()
+        // group all empty tiles together into groups
+        val groups = mutableListOf<MutableSet<PointInt>>()
         grid.indices.forEach { y ->
             grid[0].indices.forEach { x ->
-                val pos = x to y
-                val pipe = grid[y][x]
+                val pos = PointInt(x, y)
+                val pipe = pos.getFromGrid(grid)
 
                 if (pipe == null) {
                     // find all neighbours
-                    val neighbours = neighbours(pos) { dir, newPos ->
-                        if (grid[newPos.second][newPos.first] == null) newPos else null
+                    val neighbours = pos.neighbours { dir, newPos ->
+                        if (newPos.getFromGrid(grid) == null) newPos else null
                     }
 
                     // check if the neighbours already belong an existing group
@@ -129,125 +125,84 @@ class Day10 {
                     if (existingGr != null) {
                         existingGr.add(pos)
                     } else {
-                        groups.add(mutableSetOf<Point>().apply { add(pos) })
+                        groups.add(mutableSetOf<PointInt>().apply { add(pos) })
                     }
                 }
             }
         }
 
 
-        // filter groups which are fully enclosed
+        // ignore groups along the grid edge
         val enclosedGroups = groups.filterNot { gr ->
             gr.any { tile ->
-                tile.first == 0 || tile.second == 0 || tile.first == gridEnd.first || tile.second == gridEnd.second
+                tile.x == 0 || tile.y == 0 || tile.x == gridEnd.x || tile.y == gridEnd.y
             }
         }
 
-        val insideGroups = mutableListOf<MutableSet<Point>>()
-
-        // inside or outside
+        // evaluate each group to be either inside or outside, looking at the relative path direction surrounding the group
+        val insideGroups = mutableListOf<MutableSet<PointInt>>()
         enclosedGroups.forEach { gr ->
 
-            val outerTilesOfGroup = gr.filter { tile ->
-                neighbours(tile) { _, newPos -> grid[newPos.second][newPos.first] }.any()
+            val tilesAlongPath = gr.filter { tile ->
+                tile.neighbours { _, newPos -> newPos.getFromGrid(grid) }.any()
             }
 
+            val testForEachDirection = listOf(
+                listOf(
+                    Pipe.`|` to true,
+                    Pipe.F to true,
+                    Pipe.L to false,
+                ),
+                listOf(
+                    Pipe.`-` to true,
+                    Pipe.`7` to true,
+                    Pipe.F to false,
+                ),
+                listOf(
+                    Pipe.`|` to true,
+                    Pipe.`J` to true,
+                    Pipe.`7` to false,
+                ),
+                listOf(
+                    Pipe.`-` to true,
+                    Pipe.`L` to true,
+                    Pipe.J to false,
+                ),
+            )
+
             var isInside: Boolean? = null
-            for (tile in outerTilesOfGroup) {
+            for (tile in tilesAlongPath) {
 
-                val right = pathCurrentPosToExit.firstOrNull { it.first == (tile + (1 to 0)) }
-                if (right != null) {
-                    val pathTile = grid[right.first.second][right.first.first]!!
+                val startDir = DirectionInt(1, 0)
+                for (rot in (0..3)) {
+                    val tests = testForEachDirection[rot]
+                    val dir = startDir.rotate90Degrees(rot)
 
-                    val entryDir = if (right.second.reverseDirection() == pathTile.entry1) {
-                        pathTile.entry2
-                    } else {
-                        pathTile.entry1
-                    }
+                    val target = pathCurrentPosToExit.firstOrNull { it.first == (tile + dir) }
+                    if (target != null) {
+                        val pathTile = target.first.getFromGrid(grid)!!
 
-                    if (pathTile == Pipe.`|`) {
-                        isInside = right.second == 0 to 1
-                        break
+                        val entryDir = if (target.second.reverseDirection() == pathTile.entry1) {
+                            pathTile.entry2
+                        } else {
+                            pathTile.entry1
+                        }
+
+                        for (test in tests) {
+                            if (isInside == null && test.first == pathTile) {
+                                isInside = if (test.second) {
+                                    target.second
+                                } else {
+                                    entryDir
+                                } == dir.rotate90Degrees()
+                            }
+                        }
+
                     }
-                    if (pathTile == Pipe.F) {
-                        isInside = right.second == 0 to 1
-                        break
-                    }
-                    if (pathTile == Pipe.L) {
-                        isInside = entryDir == 0 to 1
-                        break
-                    }
+                    if (isInside != null) break
                 }
 
-
-                val left = pathCurrentPosToExit.firstOrNull { it.first == (tile + (-1 to 0)) }
-                if (left != null) {
-                    val pathTile = grid[left.first.second][left.first.first]!!
-                    val entryDir = if (left.second.reverseDirection() == pathTile.entry1) {
-                        pathTile.entry2
-                    } else {
-                        pathTile.entry1
-                    }
-
-                    if (pathTile == Pipe.`|`) {
-                        isInside = left.second == 0 to -1
-                        break
-                    }
-                    if (pathTile == Pipe.`J`) {
-                        isInside = left.second == 0 to -1
-                        break
-                    }
-                    if (pathTile == Pipe.`7`) {
-                        isInside = entryDir == 0 to -1
-                        break
-                    }
-                }
-
-                val up = pathCurrentPosToExit.firstOrNull { it.first == (tile + (0 to -1)) }
-                if (up != null) {
-                    val pathTile = grid[up.first.second][up.first.first]!!
-                    val entryDir = if (up.second.reverseDirection() == pathTile.entry1) {
-                        pathTile.entry2
-                    } else {
-                        pathTile.entry1
-                    }
-
-                    if (pathTile == Pipe.`-`) {
-                        isInside = up.second == 1 to 0
-                        break
-                    }
-                    if (pathTile == Pipe.`L`) {
-                        isInside = up.second == 1 to 0
-                        break
-                    }
-                    if (pathTile == Pipe.J) {
-                        isInside = entryDir == 1 to 0
-                        break
-                    }
-                }
-
-                val down = pathCurrentPosToExit.firstOrNull { it.first == (tile + (0 to 1)) }
-                if (down != null) {
-                    val pathTile = grid[down.first.second][down.first.first]!!
-                    val entryDir = if (down.second.reverseDirection() == pathTile.entry1) {
-                        pathTile.entry2
-                    } else {
-                        pathTile.entry1
-                    }
-                    if (pathTile == Pipe.`-`) {
-                        isInside = down.second == -1 to 0
-                        break
-                    }
-                    if (pathTile == Pipe.`7`) {
-                        isInside = down.second == -1 to 0
-                        break
-                    }
-                    if (pathTile == Pipe.F) {
-                        isInside = entryDir == -1 to 0
-                        break
-                    }
-                }
-
+                if (isInside != null) break
             }
 
             check(isInside != null)
@@ -257,15 +212,9 @@ class Day10 {
             }
         }
 
-        check(insideGroups.sumOf { it.size } == 417)
+        val part2 = insideGroups.sumOf { it.size }
+        check(part2== 417)
     }
 
-    private fun Point.reverseDirection() = when (this) {
-        0 to 1 -> 0 to -1
-        1 to 0 -> -1 to 0
-        0 to -1 -> 0 to 1
-        -1 to 0 -> 1 to 0
-        else -> error("")
-    }
 
 }

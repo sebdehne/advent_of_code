@@ -1,6 +1,8 @@
 package com.dehnes.adventofcode.v2022
 
 import com.dehnes.adventofcode.utils.ParserUtils.getLines
+import com.dehnes.adventofcode.utils.Point
+import com.dehnes.adventofcode.utils.plus
 import org.junit.jupiter.api.Test
 
 class Day17 {

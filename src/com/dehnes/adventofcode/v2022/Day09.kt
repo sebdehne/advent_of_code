@@ -1,6 +1,8 @@
 package com.dehnes.adventofcode.v2022
 
 import com.dehnes.adventofcode.utils.ParserUtils.getLines
+import com.dehnes.adventofcode.utils.minus
+import com.dehnes.adventofcode.utils.plus
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
@@ -54,7 +56,4 @@ class Day09 {
             if (this.second > 1) 1 else if (this.second < -1) -1 else this.second
 
 }
-
-operator fun Pair<Int, Int>.plus(o: Pair<Int, Int>) = (this.first + o.first) to (this.second + o.second)
-operator fun Pair<Int, Int>.minus(o: Pair<Int, Int>) = (this.first - o.first) to (this.second - o.second)
 

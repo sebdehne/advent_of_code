@@ -1,6 +1,6 @@
 package com.dehnes.adventofcode.v2019
 
-import com.dehnes.adventofcode.v2022.Point
+import com.dehnes.adventofcode.utils.Point
 import org.junit.jupiter.api.Test
 
 class Day13 {

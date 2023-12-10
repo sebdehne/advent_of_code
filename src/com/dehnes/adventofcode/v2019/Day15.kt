@@ -1,6 +1,6 @@
 package com.dehnes.adventofcode.v2019
 
-import com.dehnes.adventofcode.v2022.plus
+import com.dehnes.adventofcode.utils.plus
 import org.junit.jupiter.api.Test
 import java.util.*
 

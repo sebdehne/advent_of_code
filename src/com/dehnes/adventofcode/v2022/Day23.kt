@@ -1,6 +1,8 @@
 package com.dehnes.adventofcode.v2022
 
 import com.dehnes.adventofcode.utils.ParserUtils.getLines
+import com.dehnes.adventofcode.utils.Point
+import com.dehnes.adventofcode.utils.plus
 import com.dehnes.adventofcode.v2022.Directions.*
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat

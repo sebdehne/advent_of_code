@@ -1,6 +1,7 @@
 package com.dehnes.adventofcode.v2022
 
 import com.dehnes.adventofcode.utils.ParserUtils.getLines
+import com.dehnes.adventofcode.utils.plus
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
