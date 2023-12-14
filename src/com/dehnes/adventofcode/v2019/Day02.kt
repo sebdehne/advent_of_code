@@ -1,10 +1,11 @@
 package com.dehnes.adventofcode.v2019
 
+import com.dehnes.adventofcode.utils.ParserUtils.getText
 import org.junit.jupiter.api.Test
 
 class Day02 {
 
-    val originalCode = inputText(2).split(",").map { it.toInt() }
+    val originalCode = getText().split(",").map { it.toInt() }
 
     fun runCode(noun: Int, verb: Int): Int {
         val code = originalCode.toMutableList()
@@ -24,15 +25,20 @@ class Day02 {
 
     @Test
     fun main() {
-        println(runCode(12, 2)) // 2782414
+        check(runCode(12, 2) == 2782414)
 
-        (0..99).forEach { noun ->
-            (0..99).forEach { verb ->
+        var result = 0
+        outer@ for (noun in 0..99) {
+            for (verb in 0..99) {
                 if (runCode(noun, verb) == 19690720) {
-                    println(100 * noun + verb) // 9820
+                    result = 100 * noun + verb
+                    break@outer
                 }
             }
         }
+
+        check(result == 9820)
+
 
     }
 

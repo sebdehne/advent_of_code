@@ -1,10 +1,11 @@
 package com.dehnes.adventofcode.v2019
 
+import com.dehnes.adventofcode.utils.ParserUtils.getText
 import com.dehnes.adventofcode.utils.Point
 import org.junit.jupiter.api.Test
 
 class Day13 {
-    val originalCode = inputText(13).split(",").map { it.toLong() }.toMutableList()
+    val originalCode = getText().split(",").map { it.toLong() }.toMutableList()
 
     @Test
     fun part1() {

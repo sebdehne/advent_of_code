@@ -1,20 +1,21 @@
 package com.dehnes.adventofcode.v2019
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import java.io.File
 
 class Day06 {
-    val map = File("resources/day06.txt").readLines().fold(emptyMap<String, String>()) { acc, line ->
+    val map = getLines().fold(emptyMap<String, String>()) { acc, line ->
         val (parent, child) = line.split(")")
         acc + (child to parent)
     }
 
     @Test
     fun main() {
-        println(map.keys.fold(0L) { acc, key -> acc + parents(map, key).size }) // 308790
+        check(map.keys.fold(0L) { acc, key -> acc + parents(map, key).size } == 308790L)
 
-        val closestCommonParent = parents(map, "YOU").intersect(parents(map, "SAN")).maxByOrNull { parents(map, it).size }!!
-        println(parents(map, "YOU", closestCommonParent).size + parents(map, "SAN", closestCommonParent).size - 2) // 472
+        val closestCommonParent =
+            parents(map, "YOU").intersect(parents(map, "SAN")).maxByOrNull { parents(map, it).size }!!
+        check(parents(map, "YOU", closestCommonParent).size + parents(map, "SAN", closestCommonParent).size - 2 == 472)
     }
 
     fun parents(map: Map<String, String>, from: String, stopAt: String? = null): List<String> {

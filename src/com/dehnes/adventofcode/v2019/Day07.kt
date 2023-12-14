@@ -1,10 +1,11 @@
 package com.dehnes.adventofcode.v2019
 
+import com.dehnes.adventofcode.utils.ParserUtils.getText
 import org.junit.jupiter.api.Test
 import java.util.*
 
 class Day07 {
-    val originalCode = inputText(7).split(",").map { it.toLong() }
+    val originalCode = getText().split(",").map { it.toLong() }
 
     @Test
     fun main() {
@@ -19,7 +20,7 @@ class Day07 {
                 outputSignal = signal
             }
         }
-        println(outputSignal) // 844468
+        check(outputSignal == 844468L)
 
         var outputSignal2 = 0L
         combinations(listOf(5L, 6, 7, 8, 9), emptyList()) { phasees ->
@@ -51,7 +52,7 @@ class Day07 {
             }
 
         }
-        println(outputSignal2) // 4215746
+        check(outputSignal2 == 4215746L)
 
     }
 

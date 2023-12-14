@@ -1,5 +1,6 @@
 package com.dehnes.adventofcode.v2019
 
+import com.dehnes.adventofcode.utils.ParserUtils.getText
 import org.junit.jupiter.api.Test
 import java.io.File
 
@@ -7,7 +8,7 @@ class Day08 {
 
     @Test
     fun main() {
-        val pic = File("resources/day08.txt").readText().map { it.toString().toInt() }
+        val pic = getText().map { it.toString().toInt() }
         val width = 25
         val height = 6
 
@@ -17,7 +18,7 @@ class Day08 {
             index to list.count { it == 0 }
         }.minByOrNull { it.second }!!.first
 
-        println(layers[layer].count { it == 1 } * layers[layer].count { it == 2 }) // 1950
+        check(layers[layer].count { it == 1 } * layers[layer].count { it == 2 } == 1950)
 
         val resultPic = layers.reduce { acc, list ->
             acc.zip(list).map {

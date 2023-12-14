@@ -1,13 +1,14 @@
 package com.dehnes.adventofcode.v2019
 
 import com.dehnes.adventofcode.utils.MathUtils.lcm
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import com.dehnes.adventofcode.v2022.Day18.Companion.XYZ
 import com.dehnes.adventofcode.v2022.Day18.Companion.plus
 import org.junit.jupiter.api.Test
 import kotlin.math.absoluteValue
 
 class Day12 {
-    val positions = inputLines(12).map { line ->
+    val positions = getLines().map { line ->
         line.replace("<", "").replace(">", "").split(",").map { it.trim().split("=")[1].toInt() }.let {
             XYZ(
                 it[0],

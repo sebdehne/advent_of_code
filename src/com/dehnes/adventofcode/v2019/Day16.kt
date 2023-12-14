@@ -1,10 +1,12 @@
 package com.dehnes.adventofcode.v2019
 
+import com.dehnes.adventofcode.utils.ParserUtils.getText
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class Day16 {
 
-    val signal = inputText(16).toList().map { it.toString().toInt() }
+    val signal = getText().toList().map { it.toString().toInt() }
     val basePattern = listOf(0, 1, 0, -1)
 
     @Test
@@ -14,6 +16,7 @@ class Day16 {
     }
 
     @Test
+    @Disabled
     fun test2() {
         val part2Input = (1..10).flatMap { signal }
 

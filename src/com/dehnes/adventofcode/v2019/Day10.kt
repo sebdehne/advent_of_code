@@ -1,6 +1,7 @@
 package com.dehnes.adventofcode.v2019
 
 import com.dehnes.adventofcode.utils.MathUtils.gcd
+import com.dehnes.adventofcode.utils.ParserUtils.getText
 import org.junit.jupiter.api.Test
 import kotlin.math.absoluteValue
 import kotlin.math.sign
@@ -10,7 +11,7 @@ class Day10 {
     val map = mutableListOf<Pair<Long, Long>>()
 
     init {
-        inputText(10).split("\n").forEachIndexed { lineIndex, lineStr ->
+        getText().split("\n").forEachIndexed { lineIndex, lineStr ->
             lineStr.toList().forEachIndexed { colIndex, c ->
                 if (c == '#') {
                     map.add(lineIndex.toLong() to colIndex.toLong())
@@ -28,7 +29,6 @@ class Day10 {
 
         val station = asteroidsToAsteroidsLines.maxByOrNull { it.value.size }!!.key
         val asteroidsLinesForStation = asteroidsToAsteroidsLines[station]!!
-        println("@" + station + " sees " + asteroidsLinesForStation.size)
         check(asteroidsLinesForStation.size == 230)
 
         val asteroidsClockWise = asteroidsLinesForStation.toMutableList()
@@ -43,7 +43,6 @@ class Day10 {
         }
 
         val part2 = vaporized[199].let { it.second * 100 + it.first }
-        println(part2)
         check(part2 == 1205L)
     }
 

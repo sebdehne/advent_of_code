@@ -1,10 +1,11 @@
 package com.dehnes.adventofcode.v2019
 
+import com.dehnes.adventofcode.utils.ParserUtils.getText
 import org.junit.jupiter.api.Test
 
 class Day11 {
 
-    val originalCode = inputText(11).split(",").map { it.toLong() }
+    val originalCode = getText().split(",").map { it.toLong() }
 
     @Test
     fun run() {
@@ -49,8 +50,8 @@ class Day11 {
         // FKEKCFRK
         for (y in lowY..highY) {
             println(
-                (lowX..highX).joinToString(" ") { x ->
-                    if (grid[y to x] == 1) "##" else "  "
+                (lowX..highX).joinToString("") { x ->
+                    if (grid[y to x] == 1) "#" else " "
                 }
             )
         }

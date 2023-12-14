@@ -1,11 +1,14 @@
 package com.dehnes.adventofcode.v2019
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
+import com.dehnes.adventofcode.utils.plus
+import com.dehnes.adventofcode.utils.times
 import org.junit.jupiter.api.Test
 import kotlin.math.absoluteValue
 
 class Day03 {
 
-    val lines = inputLines(3).map { lineStr ->
+    val lines = getLines().map { lineStr ->
         lineStr.split(",").fold(listOf(0 to 0)) { acc, directionAndLength ->
             acc + (acc.last() + multiplier(directionAndLength[0]) * directionAndLength.substring(1).toInt())
         }
@@ -21,11 +24,11 @@ class Day03 {
                 calcIntersection(a, b)?.let { acc2 + it } ?: acc2
             }
         }.filterNot { it == 0 to 0 }
-        println("Part1: ${intersections.map { it.first.absoluteValue + it.second.absoluteValue }.minOrNull()}") // 870
+        check(intersections.minOfOrNull { it.first.absoluteValue + it.second.absoluteValue } == 870)
 
         val stepsA = intersections.map { stepsToIntersection(lineA, it) }
         val stepsB = intersections.map { stepsToIntersection(lineB, it) }
-        println("Part2: ${stepsA.zip(stepsB).map { (a, b) -> a + b }.minOrNull()}") // 13698
+        check(stepsA.zip(stepsB).minOfOrNull { (a, b) -> a + b } == 13698)
     }
 
     fun stepsToIntersection(line: List<Pair<Int, Int>>, intersection: Pair<Int, Int>) = line.windowed(2).fold(0) { steps, (a, b) ->
@@ -68,8 +71,6 @@ class Day03 {
     fun Pair<Int, Int>.contains(i: Int) = (i in this.first..this.second) || (i in this.second..this.first)
 
     fun List<Pair<Int, Int>>.isHorizontal() = this[0].line() == this[1].line()
-    operator fun Pair<Int, Int>.plus(other: Pair<Int, Int>) = this.first + other.first to this.second + other.second
-    operator fun Pair<Int, Int>.times(other: Int) = this.first * other to this.second * other
     fun columns(a: Pair<Int, Int>, b: Pair<Int, Int>) = a.second to b.second
     fun lines(a: Pair<Int, Int>, b: Pair<Int, Int>) = a.first to b.first
     fun Pair<Int, Int>.column() = this.second

@@ -8,11 +8,13 @@ class Day04 {
 
     @Test
     fun main() {
-        // 960
-        println("Part1: " + input.count { candidate -> candidate.duplicates().maxOf { it.value.size } > 1 && candidate.increasesOnly() })
+        check(input.count { candidate ->
+            candidate.duplicates().maxOf { it.value.size } > 1 && candidate.increasesOnly()
+        } == 960)
 
-        // 626
-        println("Part2: " + input.count { candidate -> candidate.duplicates().any { it.value.size == 2 } && candidate.increasesOnly() })
+        check(input.count { candidate ->
+            candidate.duplicates().any { it.value.size == 2 } && candidate.increasesOnly()
+        } == 626)
     }
 
     fun Int.duplicates() = this.toString().toList().groupBy { it }

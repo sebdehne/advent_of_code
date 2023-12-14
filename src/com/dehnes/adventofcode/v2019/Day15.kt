@@ -1,12 +1,13 @@
 package com.dehnes.adventofcode.v2019
 
+import com.dehnes.adventofcode.utils.ParserUtils.getText
 import com.dehnes.adventofcode.utils.plus
 import org.junit.jupiter.api.Test
 import java.util.*
 
 class Day15 {
 
-    val intcode = inputText(15).split(",").map { it.toLong() }.toMutableList()
+    val intcode = getText().split(",").map { it.toLong() }.toMutableList()
 
     data class Location(
         val pos: Pair<Int, Int>,

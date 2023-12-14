@@ -1,11 +1,12 @@
 package com.dehnes.adventofcode.v2019
 
+import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
 import java.util.LinkedList
 
 class Day14 {
 
-    val reactions = inputLines(14).map {
+    val reactions = getLines().map {
         val (inputStr, outputStr) = it.split(" => ")
         val inputs = inputStr.split(",").map { it.trim() }.map {
             val (q, c) = it.split(" ")
