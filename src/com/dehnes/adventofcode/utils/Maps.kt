@@ -2,6 +2,15 @@ package com.dehnes.adventofcode.utils
 
 object Maps {
 
+    fun Array<CharArray>.print() {
+        println(
+            this.joinToString("\n") {
+                it.joinToString("") { it.toString() }
+            }
+        )
+        println()
+    }
+
     fun Array<CharArray>.mirrorHorizontal(): Array<CharArray> = this.map { line -> line.reversedArray() }.toTypedArray()
 
     fun Array<CharArray>.rotateMap90Right(): Array<CharArray> {
@@ -20,4 +29,5 @@ object Maps {
     }
 
 
+    fun Array<CharArray>.sha1() = Hash.SHA1(this.flatMap { it.map { it.code.toByte() } }.toByteArray())
 }
