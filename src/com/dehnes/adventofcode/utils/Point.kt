@@ -22,6 +22,11 @@ data class DirectionInt(
             -1 to 0,
             0 to -1
         ).map { it.create() }
+
+        val up = DirectionInt(0, -1)
+        val down = DirectionInt(0, 1)
+        val right = DirectionInt(1, 0)
+        val left = DirectionInt(-1, 0)
     }
 
     fun reverseDirection() = when (this.toPair()) {
