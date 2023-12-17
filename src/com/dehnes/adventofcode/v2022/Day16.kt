@@ -33,8 +33,13 @@ class Day16 {
                         distancesTmp[p1] = 0
                         distancesTmp[p2] = 0
                     } else {
-                        val d = Dijkstra.solve(map.values, from, to)
-                        val dist = d[to]!!.first.toInt()
+                        val d2 = Dijkstra.solve(from) { n->
+                            map.values.first { it.id == n }.connections.entries.map {
+                                it.key to it.value
+                            }
+                        }
+
+                        val dist = d2[to]!!.toInt()
                         distancesTmp[p1] = dist
                         distancesTmp[p2] = dist
                     }
@@ -294,10 +299,10 @@ data class Walked(
 object Wait : Action16()
 
 data class Valve(
-    override val id: String,
+    val id: String,
     val rate: Int,
-    override val connections: Map<String, Long>,
-) : Dijkstra.Node()
+    val connections: Map<String, Long>,
+)
 
 data class PathTaken2(
     val actionsMe: List<TimedAction>,

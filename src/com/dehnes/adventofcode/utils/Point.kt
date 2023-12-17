@@ -1,7 +1,5 @@
 package com.dehnes.adventofcode.utils
 
-import com.dehnes.adventofcode.utils.DirectionInt.Companion.create
-
 typealias Point = Pair<Int, Int>
 
 operator fun Pair<Int, Int>.plus(o: Pair<Int, Int>) = (this.first + o.first) to (this.second + o.second)
@@ -10,23 +8,23 @@ operator fun Pair<Int, Int>.minus(o: Pair<Int, Int>) = (this.first - o.first) to
 operator fun Pair<Int, Int>.times(other: Int) = this.first * other to this.second * other
 
 
-data class DirectionInt(
+data class Direction(
     val x: Int,
     val y: Int,
 ) {
     companion object {
-        fun Point.create() = DirectionInt(first, second)
-        fun all90DegreesDirections(): List<DirectionInt> = listOf(
+        fun Point.create() = Direction(first, second)
+        fun all90DegreesDirections(): List<Direction> = listOf(
             1 to 0,
             0 to 1,
             -1 to 0,
             0 to -1
         ).map { it.create() }
 
-        val up = DirectionInt(0, -1)
-        val down = DirectionInt(0, 1)
-        val right = DirectionInt(1, 0)
-        val left = DirectionInt(-1, 0)
+        val up = Direction(0, -1)
+        val down = Direction(0, 1)
+        val right = Direction(1, 0)
+        val left = Direction(-1, 0)
     }
 
     fun reverseDirection() = when (this.toPair()) {
@@ -58,7 +56,7 @@ data class PointInt(
 ) {
 
     companion object {
-        fun Point.create() = PointInt(first, second)
+        fun create(p: Point) = PointInt(p.first, p.second)
     }
 
     fun <T> isPartOfGrid(grid: Array<Array<T>>) = y >= 0 && y < grid.size && x >= 0 && x < grid[0].size
@@ -67,9 +65,9 @@ data class PointInt(
 
     fun toPoint() = x to y
 
-    fun moveTo(dir: DirectionInt) = (toPoint() + dir.toPair()).create()
+    fun moveTo(dir: Direction) = create(toPoint() + dir.toPair())
 
-    operator fun plus(dir: DirectionInt) = moveTo(dir)
-    operator fun plus(dir: Point) = (toPoint() + dir).create()
+    operator fun plus(dir: Direction) = moveTo(dir)
+    operator fun plus(dir: Point) = create(toPoint() + dir)
 }
 

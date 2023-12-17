@@ -1,10 +1,10 @@
 package com.dehnes.adventofcode.v2023
 
-import com.dehnes.adventofcode.utils.DirectionInt
-import com.dehnes.adventofcode.utils.DirectionInt.Companion.down
-import com.dehnes.adventofcode.utils.DirectionInt.Companion.left
-import com.dehnes.adventofcode.utils.DirectionInt.Companion.right
-import com.dehnes.adventofcode.utils.DirectionInt.Companion.up
+import com.dehnes.adventofcode.utils.Direction
+import com.dehnes.adventofcode.utils.Direction.Companion.down
+import com.dehnes.adventofcode.utils.Direction.Companion.left
+import com.dehnes.adventofcode.utils.Direction.Companion.right
+import com.dehnes.adventofcode.utils.Direction.Companion.up
 import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import com.dehnes.adventofcode.utils.PointInt
 import org.junit.jupiter.api.Test
@@ -19,7 +19,7 @@ class Day16 {
 
     @Test
     fun part2() {
-        val startPositions = mutableListOf<Pair<PointInt, DirectionInt>>()
+        val startPositions = mutableListOf<Pair<PointInt, Direction>>()
         val yMax = map.size - 1
         val xMax = map[0].size - 1
         map.indices.forEach { y ->
@@ -60,13 +60,13 @@ class Day16 {
         check(max == 8143)
     }
 
-    fun calc(p: PointInt, dir: DirectionInt): Int {
-        val energized = mutableSetOf<Pair<PointInt, DirectionInt>>()
+    fun calc(p: PointInt, dir: Direction): Int {
+        val energized = mutableSetOf<Pair<PointInt, Direction>>()
         followBeam(p, dir, energized)
         return energized.distinctBy { it.first }.count()
     }
 
-    fun followBeam(p: PointInt, beam: DirectionInt, energized: MutableSet<Pair<PointInt, DirectionInt>>) {
+    fun followBeam(p: PointInt, beam: Direction, energized: MutableSet<Pair<PointInt, Direction>>) {
         var dir = beam
         var pos = p
         while (true) {

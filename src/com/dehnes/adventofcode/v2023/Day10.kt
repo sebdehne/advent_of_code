@@ -1,8 +1,8 @@
 package com.dehnes.adventofcode.v2023
 
-import com.dehnes.adventofcode.utils.DirectionInt
-import com.dehnes.adventofcode.utils.DirectionInt.Companion.all90DegreesDirections
-import com.dehnes.adventofcode.utils.DirectionInt.Companion.create
+import com.dehnes.adventofcode.utils.Direction
+import com.dehnes.adventofcode.utils.Direction.Companion.all90DegreesDirections
+import com.dehnes.adventofcode.utils.Direction.Companion.create
 import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import com.dehnes.adventofcode.utils.PointInt
 import org.junit.jupiter.api.Test
@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test
 class Day10 {
 
     enum class Pipe(
-        val entry1: DirectionInt,
-        val entry2: DirectionInt,
+        val entry1: Direction,
+        val entry2: Direction,
     ) {
         `|`((0 to 1).create(), (0 to -1).create()),
         `-`((1 to 0).create(), (-1 to 0).create()),
@@ -38,7 +38,7 @@ class Day10 {
     }.toTypedArray()
     val gridEnd = PointInt(grid[0].size, grid.size)
 
-    private fun <T> PointInt.neighbours(fn: (dir: DirectionInt, newPos: PointInt) -> T?) = all90DegreesDirections()
+    private fun <T> PointInt.neighbours(fn: (dir: Direction, newPos: PointInt) -> T?) = all90DegreesDirections()
         .mapNotNull { direction ->
             val p = this.moveTo(direction)
             if (!p.isPartOfGrid(grid)) {
@@ -63,7 +63,7 @@ class Day10 {
         val startDirection = possibleStartDirections[1]
 
         // record the path and the direction
-        val pathCurrentPosToExit = mutableListOf<Pair<PointInt, DirectionInt>>()
+        val pathCurrentPosToExit = mutableListOf<Pair<PointInt, Direction>>()
 
         var currentPos = startPosition
         var steps = 0
@@ -173,7 +173,7 @@ class Day10 {
             var isInside: Boolean? = null
             for (tile in tilesAlongPath) {
 
-                val startDir = DirectionInt(1, 0)
+                val startDir = Direction(1, 0)
                 for (rot in (0..3)) {
                     val tests = testForEachDirection[rot]
                     val dir = startDir.rotate90Degrees(rot)
