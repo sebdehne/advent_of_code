@@ -2,6 +2,8 @@ package com.dehnes.adventofcode.utils
 
 object RangeUtils {
 
+    fun IntRange?.len() = if (this == null) 0L else (this.last - this.first + 1).toLong()
+
     fun LongRange.offset(d: Long) = (this.first + d)..(this.last + d)
     fun LongRange.overlaps(other: LongRange): Boolean {
         if (other.first > last) return false
