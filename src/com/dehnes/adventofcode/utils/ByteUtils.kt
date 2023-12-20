@@ -9,4 +9,6 @@ object ByteUtils {
         }
         return result
     }
+
+    fun Boolean.toInt() = if (this) 1 else 0
 }
