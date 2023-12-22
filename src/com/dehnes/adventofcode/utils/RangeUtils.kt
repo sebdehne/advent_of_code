@@ -11,6 +11,12 @@ object RangeUtils {
         return true
     }
 
+    fun IntRange.overlaps(other: IntRange): Boolean {
+        if (other.first > last) return false
+        if (other.last < first) return false
+        return true
+    }
+
     data class CombineResult(
         val r: LongRange,
         val isCommon: Boolean,
