@@ -24,6 +24,32 @@ object Dijkstra {
 
         return distances
     }
+
+    fun <T> solveWithPath(start: T, edges: (n: T) -> List<Pair<T, Long>>): Map<T, Pair<Long, List<T>>> {
+        val distances = mutableMapOf<T, Pair<Long, List<T>>>()
+        distances[start] = 0L to listOf(start)
+        val todo = LinkedList<Pair<Long, T>>()
+        todo.offer(0L to start)
+        while (todo.isNotEmpty()) {
+            val (d, n) = todo.poll()
+
+            val (totalDistance, path) = distances[n]!!
+            if (d > totalDistance) continue
+
+            edges(n).forEach { (edge, weight) ->
+                val distance = weight + d
+
+                val (existingDis, _) = distances[edge] ?: (Long.MAX_VALUE to emptyList())
+
+                if (distance < existingDis) {
+                    distances[edge] = distance to (path + edge)
+                    todo.offer(distance to edge)
+                }
+            }
+        }
+
+        return distances
+    }
 }
 
 class DijkstraTest {
