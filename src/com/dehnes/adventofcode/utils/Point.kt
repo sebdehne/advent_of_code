@@ -27,13 +27,7 @@ data class Direction(
         val left = Direction(-1, 0)
     }
 
-    fun reverseDirection() = when (this.toPair()) {
-        0 to 1 -> 0 to -1
-        1 to 0 -> -1 to 0
-        0 to -1 -> 0 to 1
-        -1 to 0 -> 1 to 0
-        else -> error("")
-    }.create()
+    fun reverseDirection(): Direction = Direction(x * -1, y * -1)
 
     fun rotate90Degrees(steps: Int) = (0..<steps).fold(this) { acc, i ->
         acc.rotate90Degrees()
