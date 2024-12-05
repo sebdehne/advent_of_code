@@ -1,7 +1,7 @@
 package com.dehnes.adventofcode.utils
 
 object Combinations {
-    fun <T> combinations(list: List<T>): List<Pair<T, T>> {
+        fun <T> combinations(list: List<T>): List<Pair<T, T>> {
         val result = mutableListOf<Pair<T, T>>()
 
         list.indices.forEach { l ->
