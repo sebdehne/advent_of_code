@@ -63,5 +63,7 @@ data class PointInt(
 
     operator fun plus(dir: Direction) = moveTo(dir)
     operator fun plus(dir: Point) = create(toPoint() + dir)
+    operator fun plus(delta: PointInt) = PointInt(x + delta.x, y + delta.y)
+    operator fun minus(delta: PointInt) = PointInt(x - delta.x, y - delta.y)
 }
 
