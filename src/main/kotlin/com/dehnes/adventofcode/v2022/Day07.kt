@@ -2,8 +2,6 @@ package com.dehnes.adventofcode.v2022
 
 import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import strikt.api.expectThat
-import strikt.assertions.isEqualTo
 
 class Day07 {
 
@@ -12,11 +10,11 @@ class Day07 {
         val root = readFileSystem()
 
         val part1 = findDirBelow(root, 100000)
-        expectThat(part1.sumOf { it.calcSize() }) isEqualTo 1243729
+        check(part1.sumOf { it.calcSize() } == 1243729L)
 
         val missing = 30000000 - (70000000 - root.calcSize())
         val part2 = findDirClosestTo(root, missing)
-        expectThat(part2.calcSize()) isEqualTo 4443914
+        check(part2.calcSize() == 4443914L)
     }
 
     fun findDirClosestTo(start: File, target: Long): File {

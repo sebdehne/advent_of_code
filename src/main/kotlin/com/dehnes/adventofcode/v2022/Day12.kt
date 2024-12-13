@@ -3,8 +3,6 @@ package com.dehnes.adventofcode.v2022
 import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import com.dehnes.adventofcode.utils.plus
 import org.junit.jupiter.api.Test
-import strikt.api.expectThat
-import strikt.assertions.isEqualTo
 
 class Day12 {
 
@@ -43,8 +41,8 @@ class Day12 {
             }
         }
 
-        expectThat(grid.shortestTo(dst, startPos)) isEqualTo 437
-        expectThat(allStartPositions.minOf { grid.shortestTo(dst, it) }) isEqualTo 430
+        check(grid.shortestTo(dst, startPos) == 437)
+        check(allStartPositions.minOf { grid.shortestTo(dst, it) } == 430)
     }
 
     fun Array<IntArray>.shortestTo(dst: Pair<Int, Int>, start: Pair<Int, Int>): Int {

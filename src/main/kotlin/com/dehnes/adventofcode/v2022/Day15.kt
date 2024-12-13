@@ -3,8 +3,6 @@ package com.dehnes.adventofcode.v2022
 import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import com.dehnes.adventofcode.utils.Point
 import org.junit.jupiter.api.Test
-import strikt.api.expectThat
-import strikt.assertions.isEqualTo
 import kotlin.math.absoluteValue
 
 class Day15 {
@@ -21,23 +19,25 @@ class Day15 {
         val left = areas.minOf { it.center.first - it.radius }
         val right = areas.maxOf { it.center.first + it.radius }
 
-        expectThat(
+        check(
             run(
                 areas,
                 2000000..2000000,
                 left..right,
                 false
             )
-        ) isEqualTo 4748135
+                    == 4748135L
+        )
 
-        expectThat(
+        check(
             run(
                 areas,
                 0..4000000,
                 0..4000000,
                 true
             )
-        ) isEqualTo 13743542639657
+                    == 13743542639657L
+        )
 
     }
 

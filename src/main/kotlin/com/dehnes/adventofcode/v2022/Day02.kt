@@ -2,8 +2,6 @@ package com.dehnes.adventofcode.v2022
 
 import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import strikt.api.expectThat
-import strikt.assertions.isEqualTo
 
 class Day02 {
 
@@ -26,11 +24,11 @@ class Day02 {
             part1 += play(line[2] - 'X')
             part2 += play(((hs1 + 3) + (line[2] - 'Y')).mod(3))
         }
-        //expectThat(part1) isEqualTo 15
-        //expectThat(part2) isEqualTo 12
+        //check(part1== 15L)
+        //check(part2== 12L)
 
-        expectThat(part1) isEqualTo 9759
-        expectThat(part2) isEqualTo 12429
+        check(9759L == part1)
+        check(12429L == part2)
     }
 
 }

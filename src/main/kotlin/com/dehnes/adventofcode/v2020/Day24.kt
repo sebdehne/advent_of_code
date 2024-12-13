@@ -1,5 +1,6 @@
 package com.dehnes.adventofcode.v2020
 
+import com.dehnes.adventofcode.utils.plus
 import org.junit.jupiter.api.Test
 import java.io.File
 
@@ -82,6 +83,5 @@ class Day24 {
         }
     }
 
-    operator fun Pair<Int, Int>.plus(o: Pair<Int, Int>) = this.first + o.first to this.second + o.second
     fun IntRange.grow(w: Int) = this.first - w..this.last + w
 }

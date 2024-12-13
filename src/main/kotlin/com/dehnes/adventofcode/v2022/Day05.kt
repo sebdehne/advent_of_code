@@ -2,15 +2,13 @@ package com.dehnes.adventofcode.v2022
 
 import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import strikt.api.expectThat
-import strikt.assertions.isEqualTo
 
 class Day05 {
 
     @Test
     fun run() {
-        expectThat(moveCratesAndGetTop(true)) isEqualTo "ZWHVFWQWW"
-        expectThat(moveCratesAndGetTop(false)) isEqualTo "HZFZCCWWV"
+        check(moveCratesAndGetTop(true) == "ZWHVFWQWW")
+        check(moveCratesAndGetTop(false) == "HZFZCCWWV")
     }
 
     private fun moveCratesAndGetTop(reversed: Boolean): String {

@@ -3,8 +3,6 @@ package com.dehnes.adventofcode.v2022
 import com.dehnes.adventofcode.utils.Dijkstra
 import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import strikt.api.expectThat
-import strikt.assertions.isEqualTo
 
 class Day16 {
     val map: MutableMap<String, Valve>
@@ -124,7 +122,7 @@ class Day16 {
 
 
         val max = doneList.maxByOrNull { it.released }!!
-        expectThat(max.released) isEqualTo 2183
+        check(max.released == 2183)
     }
 
     @Test
@@ -272,7 +270,7 @@ class Day16 {
 
         val max = doneList.maxByOrNull { it.released }!!
         val maxReleased = max.released
-        expectThat(maxReleased) isEqualTo 2911
+        check(maxReleased == 2911)
 
     }
 }

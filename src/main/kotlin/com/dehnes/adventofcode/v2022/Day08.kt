@@ -2,8 +2,6 @@ package com.dehnes.adventofcode.v2022
 
 import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import strikt.api.expectThat
-import strikt.assertions.isEqualTo
 
 class Day08 {
 
@@ -46,8 +44,8 @@ class Day08 {
             }
         }
 
-        expectThat(part1) isEqualTo 1823
-        expectThat(part2) isEqualTo 211680
+        check(part1 == 1823)
+        check(part2 == 211680L)
     }
 
     fun Array<IntArray>.getLine(start: Pair<Int, Int>, step: Pair<Int, Int>): IntArray {

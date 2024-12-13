@@ -2,8 +2,6 @@ package com.dehnes.adventofcode.v2022
 
 import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import strikt.api.expectThat
-import strikt.assertions.isEqualTo
 import java.util.*
 
 class Day13 {
@@ -32,8 +30,8 @@ class Day13 {
         val first = sorted.indexOfFirst { it.toString() == div1[0].toString() } + 1
         val second = sorted.indexOfFirst { it.toString() == div2[0].toString() } + 1
 
-        expectThat(indicesOfRightOrder.sum()) isEqualTo 5659
-        expectThat(first * second) isEqualTo 22110
+        check(indicesOfRightOrder.sum() == 5659)
+        check(first * second == 22110)
     }
 
     fun isInRightOrder(left: List<Any>, right: List<Any>): Boolean? {

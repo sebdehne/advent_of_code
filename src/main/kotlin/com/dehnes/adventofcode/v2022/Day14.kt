@@ -3,24 +3,22 @@ package com.dehnes.adventofcode.v2022
 import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import com.dehnes.adventofcode.utils.plus
 import org.junit.jupiter.api.Test
-import strikt.api.expectThat
-import strikt.assertions.isEqualTo
 
 class Day14 {
 
     @Test
     fun run() {
-        expectThat(
+        check(
             getScan().let { (grid, highestY) ->
                 runSimulation(highestY, grid, false)
             }
-        ) isEqualTo 1298
+                    == 1298)
 
-        expectThat(
+        check(
             getScan().let { (grid, highestY) ->
                 runSimulation(highestY, grid, true)
             }
-        ) isEqualTo 25585
+                    == 25585)
     }
 
     fun getScan(): Pair<Array<CharArray>, Int> {

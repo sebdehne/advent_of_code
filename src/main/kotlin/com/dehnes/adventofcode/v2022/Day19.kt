@@ -2,8 +2,6 @@ package com.dehnes.adventofcode.v2022
 
 import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import strikt.api.expectThat
-import strikt.assertions.isEqualTo
 
 class Day19 {
 
@@ -18,7 +16,7 @@ class Day19 {
             qualityLevel += (result * (index + 1))
         }
 
-        expectThat(qualityLevel) isEqualTo 1681
+        check(qualityLevel == 1681)
     }
 
     @Test
@@ -31,7 +29,7 @@ class Day19 {
         val result2 = solveLagrestGeodes(blueprints[1], keepInMemSize, minutes)
         val result3 = solveLagrestGeodes(blueprints[2], keepInMemSize, minutes)
 
-        expectThat(result * result2 * result3) isEqualTo 5394
+        check(result * result2 * result3 == 5394)
     }
 
     fun solveLagrestGeodes(b: Blueprint, keepInMemSize: Int = 10000, minutes: Int = 24): Int {

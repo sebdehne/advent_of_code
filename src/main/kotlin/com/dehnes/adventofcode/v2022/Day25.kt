@@ -2,8 +2,6 @@ package com.dehnes.adventofcode.v2022
 
 import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import strikt.api.expectThat
-import strikt.assertions.isEqualTo
 import java.util.*
 import kotlin.math.pow
 
@@ -33,7 +31,7 @@ class Day25 {
         }
 
         val answer = sum.toSNAFU()
-        expectThat(answer) isEqualTo "2==0=0===02--210---1"
+        check(answer == "2==0=0===02--210---1")
     }
 
     fun Long.toSNAFU(): String {

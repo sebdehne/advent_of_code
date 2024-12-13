@@ -2,16 +2,14 @@ package com.dehnes.adventofcode.v2022
 
 import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import strikt.api.expectThat
-import strikt.assertions.isEqualTo
 
 class Day06 {
 
     @Test
     fun run() {
         val line = getLines().first()
-        expectThat(firstDistinct(line, 4)) isEqualTo 1816
-        expectThat(firstDistinct(line, 14)) isEqualTo 2625
+        check(firstDistinct(line, 4) == 1816)
+        check(firstDistinct(line, 14) == 2625)
     }
 
     private fun firstDistinct(line: String, limit: Int): Int {

@@ -2,8 +2,6 @@ package com.dehnes.adventofcode.v2022
 
 import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import strikt.api.expectThat
-import strikt.assertions.isEqualTo
 
 class Day04 {
 
@@ -20,8 +18,8 @@ class Day04 {
             part2 += if (p1.overlaps(p2) || p2.overlaps(p1)) 1L else 0L
         }
 
-        expectThat(part1) isEqualTo 424
-        expectThat(part2) isEqualTo 804
+        check(part1 == 424L)
+        check(part2 == 804L)
     }
 
     fun IntRange.containedBy(other: IntRange) = this.first in other && this.last in other

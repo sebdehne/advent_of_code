@@ -1,6 +1,7 @@
 package com.dehnes.adventofcode.v2020
 
 import org.junit.jupiter.api.Test
+import com.dehnes.adventofcode.utils.plus
 import java.io.File
 import kotlin.math.absoluteValue
 
@@ -66,7 +67,6 @@ class Day12 {
         println(part2.first.absoluteValue + part2.second.absoluteValue) // 52742
     }
 
-    operator fun Pair<Int, Int>.plus(other: Pair<Int, Int>) = this.first + other.first to this.second + other.second
     operator fun Pair<Int, Int>.times(other: Int) = this.first * other to this.second * other
 
     fun Pair<Int, Int>.rotate(degrees: Int, left: Boolean): Pair<Int, Int> {

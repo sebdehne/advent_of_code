@@ -5,8 +5,6 @@ import com.dehnes.adventofcode.utils.Point
 import com.dehnes.adventofcode.utils.plus
 import com.dehnes.adventofcode.v2022.Directions.*
 import org.junit.jupiter.api.Test
-import strikt.api.expectThat
-import strikt.assertions.isEqualTo
 
 class Day23 {
 
@@ -53,7 +51,7 @@ class Day23 {
         }
 
         val result = elfes.print()
-        expectThat(result) isEqualTo 3757
+        check(result == 3757L)
     }
 
     @Test
@@ -109,7 +107,7 @@ class Day23 {
         }
 
         val result = roundId + 1
-        expectThat(result) isEqualTo 918
+        check(result == 918L)
     }
 
 

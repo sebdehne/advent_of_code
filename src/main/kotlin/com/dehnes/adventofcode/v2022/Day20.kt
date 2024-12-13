@@ -2,16 +2,14 @@ package com.dehnes.adventofcode.v2022
 
 import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import strikt.api.expectThat
-import strikt.assertions.isEqualTo
 import java.util.*
 
 class Day20 {
 
     @Test
     fun run() {
-        expectThat(solve(1, 1)) isEqualTo 16533
-        expectThat(solve(10, 811589153)) isEqualTo 4789999181006
+        check(solve(1, 1) == 16533L)
+        check(solve(10, 811589153) == 4789999181006L)
     }
 
     fun solve(rounds: Int, key: Long): Long {

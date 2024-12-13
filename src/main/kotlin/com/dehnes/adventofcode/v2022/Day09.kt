@@ -4,16 +4,14 @@ import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import com.dehnes.adventofcode.utils.minus
 import com.dehnes.adventofcode.utils.plus
 import org.junit.jupiter.api.Test
-import strikt.api.expectThat
-import strikt.assertions.isEqualTo
 import kotlin.math.absoluteValue
 
 class Day09 {
 
     @Test
     fun run() {
-        expectThat(runSimulation(2)) isEqualTo 6236
-        expectThat(runSimulation(10)) isEqualTo 2449
+        check(runSimulation(2) == 6236)
+        check(runSimulation(10) == 2449)
     }
 
     private fun runSimulation(knots: Int): Int {

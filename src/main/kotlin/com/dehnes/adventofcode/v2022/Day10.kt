@@ -3,8 +3,6 @@ package com.dehnes.adventofcode.v2022
 import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import com.dehnes.adventofcode.utils.plus
 import org.junit.jupiter.api.Test
-import strikt.api.expectThat
-import strikt.assertions.isEqualTo
 
 class Day10 {
 
@@ -43,7 +41,7 @@ class Day10 {
             x += value
         }
 
-        expectThat(signalStrengts.sum()) isEqualTo 14520
+        check(signalStrengts.sum() == 14520L)
 
         // print screen == PZBGZEJB
         screen.forEach { println(it) }

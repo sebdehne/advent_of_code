@@ -4,8 +4,6 @@ import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import com.dehnes.adventofcode.utils.Point
 import com.dehnes.adventofcode.utils.plus
 import org.junit.jupiter.api.Test
-import strikt.api.expectThat
-import strikt.assertions.isEqualTo
 import kotlin.math.absoluteValue
 
 class Day24 {
@@ -42,7 +40,7 @@ class Day24 {
             maxX
         ) + 1
 
-        expectThat(stepsPart1) isEqualTo 242
+        check(stepsPart1 == 242)
 
         val stepsPart2 = walkValey(
             maxY + 1 to maxX,
@@ -62,7 +60,7 @@ class Day24 {
 
         val final = stepsPart1 + stepsPart2 + stepsPart3
 
-        expectThat(final) isEqualTo 720
+        check(final == 720)
     }
 
     private fun walkValey(

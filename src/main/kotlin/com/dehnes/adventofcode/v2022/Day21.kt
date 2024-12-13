@@ -2,8 +2,6 @@ package com.dehnes.adventofcode.v2022
 
 import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import strikt.api.expectThat
-import strikt.assertions.isEqualTo
 import java.util.*
 
 class Day21 {
@@ -67,7 +65,7 @@ class Day21 {
             dependenciesStack.addAll(newStack)
         }
 
-        expectThat(dependencies["root"] as Long) isEqualTo 110181395003396
+        check(dependencies["root"] as Long == 110181395003396L)
     }
 
     @Test
@@ -91,7 +89,7 @@ class Day21 {
                 end = half
             }
         }
-        expectThat(result) isEqualTo 3721298272959
+        check(result == 3721298272959L)
     }
 
     fun solve(start: String, test: Pair<String, Long>): Long {

@@ -4,8 +4,6 @@ import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import com.dehnes.adventofcode.utils.Point
 import com.dehnes.adventofcode.utils.plus
 import org.junit.jupiter.api.Test
-import strikt.api.expectThat
-import strikt.assertions.isEqualTo
 
 class Day22 {
 
@@ -111,7 +109,7 @@ class Day22 {
 
         val password = (1000 * (pos.first + 1)) + (4 * (pos.second + 1)) + direction
 
-        expectThat(password) isEqualTo 43466
+        check(password == 43466)
     }
 
     @Test
@@ -151,7 +149,7 @@ class Day22 {
 
         val password = solvePart2(gridSpecs, wrapSpecs)
 
-        expectThat(password) isEqualTo 162155
+        check(password == 162155)
     }
 
     private fun solvePart2(

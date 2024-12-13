@@ -2,16 +2,14 @@ package com.dehnes.adventofcode.v2022
 
 import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import strikt.api.expectThat
-import strikt.assertions.isEqualTo
 import java.util.*
 
 class Day11 {
 
     @Test
     fun run() {
-        expectThat(calculate(parse(), 3, 20)) isEqualTo 50830
-        expectThat(calculate(parse(), 1, 10000)) isEqualTo 14399640002
+        check(calculate(parse(), 3, 20) == 50830L)
+        check(calculate(parse(), 1, 10000) == 14399640002L)
     }
 
     private fun calculate(monkes: List<Monkey>, div: Long, rounds: Int): Long {

@@ -2,8 +2,6 @@ package com.dehnes.adventofcode.v2022
 
 import com.dehnes.adventofcode.utils.ParserUtils.getLines
 import org.junit.jupiter.api.Test
-import strikt.api.expectThat
-import strikt.assertions.isEqualTo
 
 class Day18 {
 
@@ -45,7 +43,7 @@ class Day18 {
         moveAlongAxis({ it.location.x }, { it.location.z }, { it.location.y })
         moveAlongAxis({ it.location.y }, { it.location.x }, { it.location.z })
 
-        expectThat(surfaces) isEqualTo 4504
+        check(surfaces == 4504L)
     }
 
     @Test
@@ -92,7 +90,7 @@ class Day18 {
             }
         }
 
-        expectThat(outsideSurfaces) isEqualTo 2556
+        check(outsideSurfaces == 2556)
     }
 
     companion object {
