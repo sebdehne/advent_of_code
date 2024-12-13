@@ -10,7 +10,7 @@ class Day14 {
 
     @Test
     fun part1() {
-        val map = getLines().map { it.toCharArray() }.toTypedArray()
+        val map = getLines().map { it.toList().toTypedArray() }.toTypedArray()
         map.tiltNorth()
 
         check(map.countResult() == 107142)
@@ -18,7 +18,7 @@ class Day14 {
 
     @Test
     fun part2() {
-        var map = getLines().map { it.toCharArray() }.toTypedArray()
+        var map = getLines().map { it.toList().toTypedArray() }.toTypedArray()
 
         val hashToOffset = mutableMapOf<String, Int>()
         val result: Int
@@ -46,7 +46,7 @@ class Day14 {
         check(result == 104815)
     }
 
-    private fun Array<CharArray>.tiltNorth() {
+    private fun Array<Array<Char>>.tiltNorth() {
         this[0].indices.forEach { x ->
 
             var pos = 0
@@ -82,7 +82,7 @@ class Day14 {
     }
 
 
-    private fun Array<CharArray>.countResult() = this[0].indices.sumOf { x ->
+    private fun Array<Array<Char>>.countResult() = this[0].indices.sumOf { x ->
         this.indices.sumOf { y -> if (this[y][x] == 'O') (this.size - y) else 0 }
     }
 

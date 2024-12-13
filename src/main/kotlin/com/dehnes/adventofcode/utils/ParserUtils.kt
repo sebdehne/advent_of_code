@@ -9,7 +9,7 @@ object ParserUtils {
 
     fun getLines() = getText().lines()
 
-    private fun getBytes(): ByteArray = File("resources/${getYear()}/day${getD_a_y()}.txt").readBytes()
+    private fun getBytes(): ByteArray = File("src/main/resources/${getYear()}/day${getD_a_y()}.txt").readBytes()
 
     private fun getD_a_y() = Thread.currentThread().stackTrace
         .mapNotNull {

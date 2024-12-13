@@ -6,7 +6,7 @@ import com.dehnes.adventofcode.utils.ParserUtils.getText
 import org.junit.jupiter.api.Test
 
 class Day13 {
-    val patterns = getText().split("\n\n").map { it.lines().map { it.toCharArray() }.toTypedArray() }
+    val patterns = getText().split("\n\n").map { it.lines().map { it.toList().toTypedArray() }.toTypedArray() }
 
     @Test
     fun part1() {
@@ -22,7 +22,7 @@ class Day13 {
             (1..<transformed[0].size).sumOf { 100 * (if (mirrorsAt(transformed, it, errors) == errors) it else 0) }
     }
 
-    private fun mirrorsAt(map: Array<CharArray>, at: Int, maxErrors: Int): Int {
+    private fun mirrorsAt(map: Array<Array<Char>>, at: Int, maxErrors: Int): Int {
         var errors = 0
         var left = at - 1
         var right = at

@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test
 import java.lang.Integer.max
 import java.lang.Integer.min
 import kotlin.math.absoluteValue
-import kotlin.test.assertEquals
 
 class Day23 {
 
