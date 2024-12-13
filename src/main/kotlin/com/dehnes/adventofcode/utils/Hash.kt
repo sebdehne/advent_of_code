@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException
 
 object Hash {
 
-    fun SHA1(data: ByteArray): String {
+    fun sha1(data: ByteArray): String {
         var md: MessageDigest? = null
         try {
             md = MessageDigest.getInstance("SHA-1")

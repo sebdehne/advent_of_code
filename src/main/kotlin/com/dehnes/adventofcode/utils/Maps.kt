@@ -30,5 +30,5 @@ object Maps {
     }
 
 
-    fun Array<Array<Char>>.sha1() = Hash.SHA1(this.flatMap { it.map { it.code.toByte() } }.toByteArray())
+    fun Array<Array<Char>>.sha1() = Hash.sha1(this.flatMap { it.map { it.code.toByte() } }.toByteArray())
 }
