@@ -12,6 +12,21 @@ data class Direction(
     val y: Int,
 ) {
     companion object {
+        fun Char.fromChar(): Direction = when(this) {
+            '^' -> Direction.up
+            '>' -> Direction.right
+            'v' -> Direction.down
+            '<' -> Direction.left
+            else -> error("Invalid Direction $this")
+        }
+
+        fun Direction.toChar() = when (this) {
+            Direction.up -> '^'
+            Direction.down -> 'v'
+            Direction.right -> '>'
+            Direction.left -> '<'
+            else ->  error("")
+        }
         fun Point.create() = Direction(first, second)
         fun all90DegreesDirections(): List<Direction> = listOf(
             1 to 0,

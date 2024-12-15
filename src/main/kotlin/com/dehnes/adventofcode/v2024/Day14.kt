@@ -80,6 +80,7 @@ class Day14 {
 
         // look at the image and find the x-mas tree - at sub-image: Y:73 X:9
         val part2 = 72 * imgArea.y + 9
+        check(7569 == part2)
         printMap(robots.map { move(it, part2) })
     }
 

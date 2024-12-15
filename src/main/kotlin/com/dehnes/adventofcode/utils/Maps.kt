@@ -11,6 +11,38 @@ object Maps {
         println()
     }
 
+    fun Array<Array<Char>>.print() {
+        println(
+            this.joinToString("\n") {
+                it.joinToString("") { it.toString() }
+            }
+        )
+        println()
+    }
+
+    operator fun <T> Array<Array<T>>.set(pos: PointInt, t: T) {
+        this[pos.y][pos.x] = t
+    }
+
+    fun <T> Array<Array<T>>.forEachPos(fn: (PointInt, T) -> Any) {
+        this.indices.forEach { y ->
+            this[0].indices.forEach { x ->
+                fn(PointInt(x, y), this[y][x])
+            }
+        }
+    }
+
+    fun <T> Array<Array<T>>.findPos(t: T): PointInt? {
+        this.indices.forEach { y ->
+            this[0].indices.forEach { x ->
+                if (this[y][x] == t) {
+                    return PointInt(x, y)
+                }
+            }
+        }
+        return null
+    }
+
     fun Array<Array<Char>>.mirrorHorizontal(): Array<Array<Char>> =
         this.map { line -> line.reversedArray() }.toTypedArray()
 
@@ -29,6 +61,6 @@ object Maps {
         return result
     }
 
-
     fun Array<Array<Char>>.sha1() = Hash.sha1(this.flatMap { it.map { it.code.toByte() } }.toByteArray())
+    fun Array<Array<Char>>.get(pos: PointInt) = this[pos.y][pos.x]
 }
