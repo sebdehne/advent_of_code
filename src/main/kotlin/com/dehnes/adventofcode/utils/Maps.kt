@@ -24,6 +24,8 @@ object Maps {
         this[pos.y][pos.x] = t
     }
 
+    fun Array<Array<Char>>.copy() = Array(size) { get(it).clone() }
+
     fun <T> Array<Array<T>>.forEachPos(fn: (PointInt, T) -> Any) {
         this.indices.forEach { y ->
             this[0].indices.forEach { x ->
